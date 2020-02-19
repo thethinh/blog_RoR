@@ -49,12 +49,17 @@ class User < ApplicationRecord
         UserMailer.account_activation(self).deliver_now
     end
 
+    # Sends auto email to mail user
+    def self.send_auto_email
+        User.all.each{|user| ScheduleMailer.auto_sendmail(user).deliver}
+    end
+    
+
     private
         # Converts email to all lower-case.
         def downcase_email
             self.email = email.downcase
         end
-
         # Creates and assigns the activation token and digest.
         def create_activation_digest
             self.activation_token  = User.new_token
