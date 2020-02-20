@@ -9,8 +9,12 @@ gem 'will_paginate',           '3.1.7'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'faker',          '1.7.3'
 gem "figaro"
+<<<<<<< HEAD
+gem 'pry-rails', :group => :development
+=======
 gem 'carrierwave',             '1.2.2'
 gem 'mini_magick',             '4.9.4'
+>>>>>>> following-users
 
 # # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
@@ -49,6 +53,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'whenever', require: false
+
 end
 
 group :test do
