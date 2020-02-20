@@ -3,3 +3,15 @@
 <p>Hi <%= @user.name %>,</p>
 
 <p>Nice time for you</p>
+
+<p>
+Posts is posted this week : <%= @user.microposts
+                                     .where(created_at: (Time.now.midnight - 7.day)..(Time.now.midnight - 1.minutes))
+                                     .count %>
+</p>
+<p>
+Followers extra this week : <%= @user.followers
+                                     .where(created_at: (Time.now.midnight - 7.day)..(Time.now.midnight - 1.minutes))
+                                     .count%>
+</p>
+
