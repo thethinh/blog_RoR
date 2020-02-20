@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    scope :calculation_oneweek, -> { where(created_at: (1.week.ago.beginning_of_day)..Time.zone.now.end_of_day) }
+
     has_many :microposts,  dependent: :destroy
     has_many :active_relationships, class_name:  "Relationship",
                                     foreign_key: "follower_id",

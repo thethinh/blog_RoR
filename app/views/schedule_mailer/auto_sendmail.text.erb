@@ -1,10 +1,6 @@
 HI <%= @user.name %>
 
-<%= Posts is posted this week : <%= @user.microposts
-                                     .where(created_at: (Time.now.midnight - 7.day)..(Time.now.midnight - 1.minutes))
-                                     .count %>
-<%= Followers extra this week : <%= @user.followers
-                                     .where(created_at: (Time.now.midnight - 7.day)..(Time.now.midnight - 1.minutes))
-                                     .count%>
+Posts is posted this week : <%= @user.microposts.calculation_oneweek.count %>
+Followers extra this week : <%= @user.followers.calculation_oneweek.count%>
 
 Nice time for you !
