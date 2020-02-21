@@ -274,3 +274,17 @@ span.picture {
 .users.follow {
   padding: 0;
 }
+
+/* btn login with gg and facebook */
+.login-other{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.google{
+  background-color: #b12727;
+}
+.google:hover{
+  background-color: rgb(105, 43, 43);
+}

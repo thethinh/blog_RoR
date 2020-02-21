@@ -18,6 +18,9 @@
       <% end %>
 
       <%= f.submit "Log in", class: "btn btn-primary" %>
+      <p style="display:flex; justify-content:center; color:#0000007a; margin:4px 0px 4px">OR </p>
+      <%= link_to "Login with google", '#', class:"btn btn-primary login-other google" %>
+      <%= link_to "Login with facebook", '#', class:"btn btn-primary login-other facebook"  %>
     <% end %>
 
     <p>New user? <%= link_to "Sign up now!", signup_path %></p>
