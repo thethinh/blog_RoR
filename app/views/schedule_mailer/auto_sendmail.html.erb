@@ -1,0 +1,13 @@
+<h1>Sample App</h1>
+
+<p>Hi <%= @user.name %>,</p>
+
+<p>Nice time for you</p>
+
+<p>
+Posts is posted this week : <%= @user.microposts.calculation_oneweek.count %>
+</p>
+<p>
+Followers extra this week : <%= @user.followers.calculation_oneweek.count%>
+</p>
+

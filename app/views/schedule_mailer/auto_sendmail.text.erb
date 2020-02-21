@@ -1,0 +1,6 @@
+HI <%= @user.name %>
+
+Posts is posted this week : <%= @user.microposts.calculation_oneweek.count %>
+Followers extra this week : <%= @user.followers.calculation_oneweek.count%>
+
+Nice time for you !

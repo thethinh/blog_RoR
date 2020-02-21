@@ -18,6 +18,8 @@ class User < ApplicationRecord
                       uniqueness: { case_sensitive: false }
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+    scope :calculation_oneweek, -> { where(created_at: (1.week.ago.beginning_of_day)..Time.zone.now.end_of_day) }
+
 
     def self.digest(string)
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -58,6 +60,12 @@ class User < ApplicationRecord
         UserMailer.account_activation(self).deliver_now
     end
 
+    # Sends auto email to mail user
+    def self.send_auto_email
+        User.all.each{|user| ScheduleMailer.auto_sendmail(user).deliver}
+    end
+       
+
     # Sets the password reset attributes.
     def create_reset_digest
         self.reset_token = User.new_token
@@ -94,14 +102,11 @@ class User < ApplicationRecord
         following.include?(other_user)
     end
 
-
-
     private
         # Converts email to all lower-case.
         def downcase_email
             self.email = email.downcase
         end
-
         # Creates and assigns the activation token and digest.
         def create_activation_digest
             self.activation_token  = User.new_token
