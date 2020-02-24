@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
-  def googleAuth
+  def getomniAuth
     # Get access tokens from the google server
     access_token = request.env["omniauth.auth"]
     user = User.from_omniauth(access_token)
@@ -35,9 +35,10 @@ class SessionsController < ApplicationController
       log_in user
       redirect_to user
     else
+      flash.now[:danger] = 'Fail authentication'
       redirect_to login_path
     end
   end
   
-  
+
 end

@@ -113,7 +113,7 @@ class User < ApplicationRecord
                 email: auth.info.email,
                 password: auth.uid,
                 password_confirmation: auth.uid,
-                activated: true # activated account because it's validated from google
+                activated: true # activated account because it's authentication from google
             )
         end
     end

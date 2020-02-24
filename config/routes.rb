@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'static_pages/home'
   get 'static_pages/help'
   get '/login', to: 'sessions#new'
-  get 'auth/:provider/callback', to: 'sessions#googleAuth'
+  get 'auth/:provider/callback', to: 'sessions#getomniAuth'
   get 'auth/failure', to: redirect('/')
 
   # POST routes
