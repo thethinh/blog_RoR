@@ -14,6 +14,7 @@ gem 'mini_magick',             '4.9.4'
 gem "omniauth"
 gem 'omniauth-google-oauth2'
 gem "omniauth-facebook"
+gem 'rubocop-rails', require: false
 
 # # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'

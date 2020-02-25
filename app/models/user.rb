@@ -105,12 +105,11 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     # create new user if doesn't exist user email
     user = User.find_by(email: auth.info.email)
-    user = user.presence || User.new(
-                name: auth.info.name,
-                email: auth.info.email,
-                password: auth.uid,
-                password_confirmation: auth.uid,
-                activated: true )# activated account because it's authentication from google
+    user = user.presence || User.new( name: auth.info.name,
+                                      email: auth.info.email,
+                                      password: auth.uid,
+                                      password_confirmation: auth.uid,
+                                      activated: true )# activated account because it's authentication from google
   end
 
   private

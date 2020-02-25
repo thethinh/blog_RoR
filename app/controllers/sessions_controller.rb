@@ -1,11 +1,11 @@
 class SessionsController < ApplicationController
   def new
-
+    # code here
   end
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
+    if user&.authenticate(params[:session][:password])
       if user.activated?
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
-  def get_omniAuth
+  def access_omniAuth
     # Get access tokens from the google server
     access_token = request.env["omniauth.auth"]
     user = User.from_omniauth(access_token)
@@ -39,6 +39,4 @@ class SessionsController < ApplicationController
       redirect_to login_path
     end
   end
-  
-
 end
