@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   scope :calculation_oneweek, -> { where(created_at: (1.week.ago.beginning_of_day)..Time.zone.now.end_of_day) }
-
+  scope :csv_follow, -> {select(:created_at, :name).where(created_at: 1.month.ago..Time.zone.now)}
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -112,6 +112,20 @@ class User < ApplicationRecord
                                       activated: true )# activated account because it's authentication from google
   end
 
+  def self.to_csv_follow
+
+    # convert to csv file
+    attributes = %w{created_at name}
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.each do |user|
+        csv << attributes.map{ |attr| user.send(attr) }
+      end
+    end
+  end
+  
   private
     # Converts email to all lower-case.
     def downcase_email
