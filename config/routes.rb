@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   get 'auth/:provider/callback', to: 'sessions#access_omniAuth'
   get 'auth/failure', to: redirect('/')
+  get '/download/infor_csv', to: 'downloadcsvs#info_csv'
 
   # POST routes
   post '/signup',  to: 'users#create'

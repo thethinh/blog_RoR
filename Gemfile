@@ -15,6 +15,7 @@ gem "omniauth"
 gem 'omniauth-google-oauth2'
 gem "omniauth-facebook"
 gem 'rubocop-rails', require: false
+gem "rubyzip"
 
 # # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
