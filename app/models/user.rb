@@ -18,8 +18,8 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  scope :calculation_oneweek, -> { where(created_at: (1.week.ago.beginning_of_day)..Time.zone.now.end_of_day) }
-  scope :csv_follow, -> {select(:created_at, :name).where(created_at: 1.month.ago..Time.zone.now)}
+  scope :calculation_oneweek, ->(start_date, end_date) { where(created_at: start_date..end_date) }
+  scope :csv_follow_1_month_recent, ->(start_date, end_date) {select(:created_at, :name).where(created_at: start_date..end_date)}
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -113,7 +113,6 @@ class User < ApplicationRecord
   end
 
   def self.to_csv_follow
-
     # convert to csv file
     attributes = %w{created_at name}
 

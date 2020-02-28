@@ -2,14 +2,17 @@ class DownloadcsvsController < ApplicationController
   require 'zip'
 
   def info_csv
+    start_date = 1.month.ago
+    end_date = Time.zone.now 
+    
     #get current user's posts 
-    @posts = current_user.microposts.csv_post
+    @posts = current_user.microposts.csv_post_1_month_recent(start_date,end_date)
                         
     #get current user's followings
-    @followings = current_user.following.csv_follow
+    @followings = current_user.following.csv_follow_1_month_recent(start_date,end_date)
                         
     #get followers current user
-    @followers = current_user.followers.csv_follow
+    @followers = current_user.followers.csv_follow_1_month_recent(start_date,end_date)
 
     respond_to do |format|
       format.html

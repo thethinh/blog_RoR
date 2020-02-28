@@ -1,6 +1,9 @@
 HI <%= @user.name %>
 
-Posts is posted this week : <%= @user.microposts.calculation_oneweek.count %>
-Followers extra this week : <%= @user.followers.calculation_oneweek.count%>
+<%= start_date = 1.week.ago.beginning_of_day%>
+<%= end_date = Time.zone.now.end_of_day%>
+
+Posts is posted this week : <%= @user.microposts.calculation_oneweek(start_date,end_date).count %>
+Followers extra this week : <%= @user.followers.calculation_oneweek(start_date,end_date).count%>
 
 Nice time for you !

@@ -5,8 +5,8 @@ class Micropost < ApplicationRecord
   validates :content, presence: true, length: { maximum: 140 }
   validate  :picture_size
   default_scope -> { order(created_at: :desc) }
-  scope :calculation_oneweek, -> { where(created_at: (1.week.ago.beginning_of_day)..Time.zone.now.end_of_day) }
-  scope :csv_post, -> {select(:created_at, :content, :picture).where(created_at: 1.month.ago..Time.zone.now)}
+  scope :calculation_oneweek, ->(start_date, end_date) { where(created_at: start_date..end_date) }
+  scope :csv_post_1_month_recent, ->(start_date, end_date) {select(:created_at, :content, :picture).where(created_at: start_date..end_date)}
 
   # Validates the size of an uploaded picture.
   def picture_size
