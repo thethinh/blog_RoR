@@ -30,4 +30,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
+  resources :microposts do
+    resources :comments
+  end
 end

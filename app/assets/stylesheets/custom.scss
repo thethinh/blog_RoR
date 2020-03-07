@@ -1,5 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 
 /* universal */
 
@@ -145,7 +148,7 @@ input, textarea, select, .uneditable-input {
 }
   
 input {
-    height: auto !important;
+    height: auto ;
 }
 
 .checkbox {
@@ -195,32 +198,120 @@ input {
 .microposts {
   list-style: none;
   padding: 0;
+  hr{
+    border-top: 1px solid #c7c3c3;
+  }
   li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    padding: 10px 0px;
+    border: 1px solid #e8e8e8;
+    background-color: #e2e2e2;
+    margin-top: 12px;
+    border-radius: 5px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
   .user {
-    margin-top: 5em;
-    padding-top: 0;
+    position: relative;
+    top: 5px;
   }
   .content {
     display: block;
-    margin-left: 60px;
+    margin-top: 30px;
+    margin-left: 5px;
     img {
       display: block;
       padding: 5px 0;
+      margin-top: 10px;
+    }
+    .gravatar{
+      float: left;
+      margin-right: 10px;
+      margin-top: 5px;
+      height: 30px;
+      width: 30px;
     }
   }
   .timestamp {
     color: $gray-light;
     display: block;
     margin-left: 60px;
+    margin-top: 5px;
   }
   .gravatar {
     float: left;
     margin-right: 10px;
     margin-top: 5px;
   }
+  .box-comment{
+    display: flex;
+    margin-top: 15px;
+    .gravatar {
+      height: 38px;
+      width: 38px;
+      margin-top: 11px;
+      border-radius: 50%;
+    }
+    .typecmt{
+      position: relative;
+      top: 10px;
+      padding-left: 15px;
+      border-radius: 30px;
+      height: 38px;
+      outline: none;
+    }
+  }
+  .area-cmt{
+    .display-cmt{
+      display: flex;
+      width: 660px;
+      margin-top: 8px;
+      margin-left: 8px;
+      .gravatar{
+        border-radius: 50px;
+      }
+      p{
+        margin-top: 6px;
+        background-color: #8e8e8a26;
+        padding: 5px 10px 5px 10px;
+        border-radius: 15px;
+        word-break: break-all;
+        a{
+          font-weight: bold;
+        }
+      }
+    }
+    .reaction-cmt{
+      display: block;
+      margin-left: 62px;
+      margin-top: -8px;
+      .like-btn:hover .reactions-box {
+        display: block;
+      }
+      a{
+        font-size: 13px;
+        opacity: 0.9;
+      }
+      .time-cmt{
+        color: #868688;
+      }
+    }
+    .reaction {
+      list-style-type: none;
+      cursor: pointer;
+      display: inline-block;
+      width: 48px;
+      height: 48px;
+      position: absolute;
+      top: 8px;
+      opacity: 0;
+      transform: scale(1, 1);
+      transition: opacity .5s ease-in-out 1s, transform .07s ease-in-out 0s, top .07s ease-in-out 0s;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center
+    }
+  }
+  
 }
 
 aside {
