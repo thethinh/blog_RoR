@@ -1,0 +1,7 @@
+<span class='box-comment'>
+  <%= gravatar_for(current_user, size: 38) %>
+  <%= form_for :comment, url: yield(:url_action), method: yield(:method_controll), remote: true  do |f| %>
+    <%= f.text_field :body, class: yield(:class_typecmt), placeholder:"Viết bình luận...." %>
+  <% end %>
+</span> 
+

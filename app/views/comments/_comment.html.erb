@@ -1,4 +1,4 @@
-<div class="area-cmt">
+<div class="area-cmt" id="<%= comment.id %>">
   <div class="display-cmt">
     <%= link_to gravatar_for(comment.user, size: 38), comment.user %>
     <p>
@@ -8,18 +8,6 @@
   </div>
 
   <div class="reaction-cmt">
-    <%# <span class="like-btn"> 
-      <span class="like-btn-emo like-btn-default"></span> 
-      <span class="like-btn-text"><a href="#">Like&nbsp</a></span> 
-      <ul class="reactions-box">
-        <li class="reaction reaction-like" data-reaction="Like"></li>
-        <li class="reaction reaction-love" data-reaction="Love"></li>
-        <li class="reaction reaction-haha" data-reaction="HaHa"></li>
-        <li class="reaction reaction-wow" data-reaction="Wow"></li>
-        <li class="reaction reaction-sad" data-reaction="Sad"></li>
-        <li class="reaction reaction-angry" data-reaction="Angry"></li>
-      </ul>
-    </span> %>
     <a href="#">Like&nbsp</a>
     .
     <a href="#">&nbspReply&nbsp</a>
@@ -27,5 +15,17 @@
     <span class="time-cmt">
       <%= time_ago_in_words(comment.created_at) %> ago
     </span>
+
+    <%# comment của chủ sở hữu được sửa %>
+    <% if comment_of_user?(comment) %> 
+        .&nbsp
+      <%= link_to "Edit", edit_comment_path(comment), remote: true %>
+    <% end %>
+    
+    <%# Chủ sỡ hữu của một post có quyền xóa cmt trong đó hoặc chủ sở hữu cmt được xóa comment %>
+    <% if(comment_in_post_user?(comment) || comment_of_user?(comment)) %> 
+      .&nbsp
+      <%= link_to "Delete", comment, method: :delete, data: { confirm: "You sure delete ?" }, remote: true %>
+    <% end %>
   </div>
 </div>
