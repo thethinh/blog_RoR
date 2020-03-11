@@ -1,0 +1,6 @@
+<span class='box-comment'>
+  <%= gravatar_for(current_user, size: 38) %>
+  <%= form_for :comment, url: url_action, method: method_controll, remote: true do |f| %>
+    <%= f.text_field :body, class: class_form_cmt, placeholder:"Viết bình luận...." %>
+  <% end %>
+</span> 

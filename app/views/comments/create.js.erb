@@ -1,0 +1,9 @@
+
+<% if @comment.errors.any? %>
+  alert("comment not blank!, please see again.");
+<% else %>
+  $("#cmtpost<%= @comment.micropost_id %>").append("<%= escape_javascript render(@comment) %>");
+
+  $(".<%= @comment.micropost_id %>")[0].value = "";
+<% end %>
+

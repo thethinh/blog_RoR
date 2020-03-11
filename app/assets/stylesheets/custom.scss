@@ -258,6 +258,7 @@ input {
       border-radius: 30px;
       height: 38px;
       outline: none;
+      width: 650px;
     }
   }
   .area-cmt{
@@ -278,7 +279,7 @@ input {
         a{
           font-weight: bold;
         }
-      }
+      }  
     }
     .reaction-cmt{
       display: block;
@@ -311,9 +312,7 @@ input {
       background-position: center center
     }
   }
-  
 }
-
 aside {
   textarea {
     height: 100px;

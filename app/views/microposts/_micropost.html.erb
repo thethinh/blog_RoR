@@ -15,18 +15,16 @@
 
   <hr>
 
-  
   <div id="cmtpost<%= micropost.id %>">
-    <% micropost.comment.first(3).each do |comment|%>
+    <% micropost.comment.last(5).reverse.each do |comment|%>
       <%= render comment %>
     <% end %>
   </div>
 
   <%= link_to "Show comment", micropost_comments_path(micropost), remote: true, class: "btn-showcmt#{micropost.id}" %>
 
-  <%# <span class='box-comment'>
-    <%= gravatar_for(micropost.user, size: 38) %>
-    <%# <input class="typecmt"  placeholder='Viết bình luận....'> %>
-  <%# </span>  %>
-
+  <%= render "comments/comment_form", {url_action: user_comments_path(current_user, micropost_id: micropost.id),
+                                       method_controll: "POST",
+                                       class_form_cmt: "typecmt #{micropost.id}" } %>
 </li>
+
