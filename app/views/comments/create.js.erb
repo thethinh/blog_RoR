@@ -1,3 +1,4 @@
+
 <% if @comment.errors.any? %>
   alert("comment not blank!, please see again.");
 <% else %>
@@ -5,3 +6,4 @@
 
   $(".<%= @comment.micropost_id %>")[0].value = "";
 <% end %>
+
