@@ -1,7 +1,3 @@
-<% provide(:url_action, user_comments_path(current_user, micropost_id: micropost.id)) %>
-<% provide(:class_typecmt, "typecmt #{micropost.id}") %>
-<% provide(:method_controll, "post") %>
-
 <li id="<%= micropost.id %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
@@ -27,5 +23,9 @@
 
   <%= link_to "Show comment", micropost_comments_path(micropost), remote: true, class: "btn-showcmt#{micropost.id}" %>
 
-  <%= render "comments/comment_form" %>
+  <%= render "comments/comment_form", {url_action: user_comments_path(current_user, micropost_id: micropost.id),
+                                       method_controll: "POST",
+                                       class_form_cmt: "typecmt #{micropost.id}" } %>
 </li>
+
+

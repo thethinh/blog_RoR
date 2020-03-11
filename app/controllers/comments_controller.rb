@@ -1,13 +1,15 @@
 class CommentsController < ApplicationController
-  before_action :correct_cmt_user, only: [:destroy] 
+  include CommentsHelper
+
+  before_action :correct_cmt_user, only: [:destroy, :edit, :update] 
 
   def index
-    current_Sum_Cmt = params[:currentSumCmt].to_i
+    current_sum_cmt = params[:currentSumCmt].to_i
     @post = Micropost.find(params[:micropost_id])
 
     if(params[:currentSumCmt])
       # Nếu có số comment truyền lên thì lấy ra số  cmt = số cmt hiện tại + 4
-      @comment = @post.comment.last(current_Sum_Cmt + 4).reverse
+      @comment = @post.comment.last(current_sum_cmt + 4).reverse
     else
       #Nếu chưa có params truyền lên(lúc ban đầu) thì lấy ra 7 cmt (số comment ban đầu( mặc định 3) + 4)
       @comment = @post.comment.last(7).reverse
@@ -26,6 +28,11 @@ class CommentsController < ApplicationController
         format.html{render @comment}
         format.js
       end
+    else
+      respond_to do |format|
+        format.html{render @comment}
+        format.js
+      end
     end
   end
 
@@ -38,7 +45,6 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = Comment.find(params[:id])
     respond_to  do |format|
       format.html{render @comment}
       format.js
@@ -46,13 +52,18 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @comment = Comment.find(params[:id])
     if @comment.update_attributes(comment_params)
       respond_to do |format|
         format.html{render @comment}
         format.js
       end
+    else
+      respond_to do |format|
+        format.html{render @comment}
+        format.js
+      end
     end
+
   end
   
   private
@@ -63,8 +74,10 @@ class CommentsController < ApplicationController
 
   def correct_cmt_user
     @comment = Comment.find_by(id: params[:id])
-    redirect_to root_url if @comment.nil?
+    
+    if (@comment.nil? || (!comment_in_post_user?(@comment) && !comment_of_user?(@comment)))
+      redirect_to root_url 
+    end
   end
-  
   
 end
