@@ -267,6 +267,7 @@ input {
       width: 660px;
       margin-top: 8px;
       margin-left: 8px;
+      
       .gravatar{
         border-radius: 50px;
       }
@@ -285,8 +286,106 @@ input {
       display: block;
       margin-left: 62px;
       margin-top: -8px;
-      .like-btn:hover .reactions-box {
-        display: block;
+      .like-btn{
+        position: relative;
+      }
+      .like-btn:hover .reactions-box{
+        visibility: visible;
+        opacity: 1;
+      }
+      .reactions-box{
+        position: absolute;
+        height: 50px;
+        width: 321px;
+        background-color: beige;
+        border-radius: 50px;
+        top: -55px;
+        left: -10px;
+        display: flex;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility .05s, opacity 0.5s linear;
+        .reaction{
+          list-style-type: none;
+          height: 42px;
+          width: 42px;
+          margin-top: 3.6px;
+          display: block;
+          transition: all ease-in-out 0.1s;
+        }
+        .reaction:hover {
+          margin-top: -1.6px;
+          transform: scale(1.2,1.2);
+        } 
+        .reaction::before {
+          display: inline-block;
+          color: #ffffff;
+          text-align: center;
+          line-height: 17px;
+          font-size: .8em;
+          width: 36px;
+          height: 17px;
+          background-color: rgba(0, 0, 0, 0.6);
+          border-radius: 20px;
+          position: absolute;
+          top: -25px;
+          font-weight: bold;
+          margin-left: 3px;
+          opacity: 0;
+          transition: opacity .2s ease-in-out 0s;
+        }
+        .reaction:hover::before {
+          opacity: 1
+        }        
+        .reaction-like{
+          background-image: url('/reactions/reactions_like.png');
+          background-size: cover;
+          margin-left: 12px;
+        }
+        .reaction-like::before{
+          content: "Like";
+        }
+        .reaction-love{
+          background-image: url('/reactions/reactions_love.png');
+          background-size: cover;
+          margin-left: 9px;
+        }
+        .reaction-love::before{
+          content: "Love";
+          
+        }
+        .reaction-haha{
+          background-image: url('/reactions/reactions_haha.png');
+          background-size: cover;
+          margin-left: 9px;
+        }
+        .reaction-haha::before{
+          content: "Haha";
+        }
+        .reaction-wow{
+          background-image: url('/reactions/reactions_wow.png');
+          background-size: cover;
+          margin-left: 9px;
+        }
+        .reaction-wow::before{
+          content: "Wow";
+        }
+        .reaction-sad{
+          background-image: url('/reactions/reactions_sad.png');
+          background-size: cover;
+          margin-left: 9px;
+        }
+        .reaction-sad::before{
+          content: "Sad";
+        }
+        .reaction-angry{
+          background-image: url('/reactions/reactions_angry.png');
+          background-size: cover;
+          margin-left: 9px;
+        }
+        .reaction-angry::before{
+          content: "Angry";
+        }
       }
       a{
         font-size: 13px;
@@ -295,21 +394,6 @@ input {
       .time-cmt{
         color: #868688;
       }
-    }
-    .reaction {
-      list-style-type: none;
-      cursor: pointer;
-      display: inline-block;
-      width: 48px;
-      height: 48px;
-      position: absolute;
-      top: 8px;
-      opacity: 0;
-      transform: scale(1, 1);
-      transition: opacity .5s ease-in-out 1s, transform .07s ease-in-out 0s, top .07s ease-in-out 0s;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center center
     }
   }
 }

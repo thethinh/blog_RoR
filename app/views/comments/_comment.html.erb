@@ -8,23 +8,33 @@
   </div>
 
   <div class="reaction-cmt">
-    <a href="#">Like&nbsp</a>
-    .
-    <a href="#">&nbspReply&nbsp</a>
-    .&nbsp
+    <span class="like-btn">
+      <a href="#">Like</a>
+      <div class="reactions-box">
+        <span><a class="reaction reaction-like" href="#"></a> </span>
+        <span><a class="reaction reaction-love" href="#"></a> </span>
+        <span><a class="reaction reaction-haha" href="#"></a> </span>
+        <span><a class="reaction reaction-wow" href="#"></a> </span>
+        <span><a class="reaction reaction-sad" href="#"></a> </span>
+        <span><a class="reaction reaction-angry" href="#"></a> </span>
+      </div>
+    </span> 
+    &nbsp.&nbsp
+    <a href="#">Reply</a>
+    &nbsp.&nbsp
     <span class="time-cmt">
       <%= time_ago_in_words(comment.created_at) %> ago
     </span>
 
     <%# comment của chủ sở hữu được sửa %>
     <% if comment_of_user?(comment) %> 
-        .&nbsp
+        &nbsp.&nbsp
       <%= link_to "Edit", edit_comment_path(comment), remote: true %>
     <% end %>
     
     <%# Chủ sỡ hữu của một post có quyền xóa cmt trong đó hoặc chủ sở hữu cmt được xóa comment %>
     <% if(comment_in_post_user?(comment) || comment_of_user?(comment)) %> 
-      .&nbsp
+      &nbsp.&nbsp
       <%= link_to "Delete", comment, method: :delete, data: { confirm: "You sure delete ?" }, remote: true %>
     <% end %>
   </div>
