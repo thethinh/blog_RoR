@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#access_omniAuth'
   get 'auth/failure', to: redirect('/')
   get '/download/infor_csv', to: 'downloadcsvs#info_csv'
+  get '/reaction_comment', to: 'reactions#reaction_comment'
 
   # POST routes
   post '/signup',  to: 'users#create'
@@ -38,4 +39,5 @@ Rails.application.routes.draw do
   resources :users do
     resources :comments, only: [:create, :update]
   end
+
 end

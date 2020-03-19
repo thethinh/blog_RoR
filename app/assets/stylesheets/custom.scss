@@ -204,7 +204,7 @@ input {
   li {
     padding: 10px 0px;
     border: 1px solid #e8e8e8;
-    background-color: #e2e2e2;
+    background-color: #f7f7f7;
     margin-top: 12px;
     border-radius: 5px;
     padding-left: 12px;
@@ -288,6 +288,30 @@ input {
       margin-top: -8px;
       .like-btn{
         position: relative;
+        .Haha{
+          color: rgb(247, 177, 37);;
+          font-weight: bold;
+        }
+        .Love{
+          color: rgb(243, 62, 88);
+          font-weight: bold;
+        }
+        .Wow{
+          font-weight: bold;
+          color: rgb(247, 177, 37);
+        }
+        .Sad{
+          font-weight: bold;
+          color: rgb(247, 177, 37);
+        }
+        .Like{
+          font-weight: bold;
+          color: rgb(32, 120, 244);
+        }
+        .Angry{
+          font-weight: bold;
+          color: rgb(233, 113, 15);
+        }
       }
       .like-btn:hover .reactions-box{
         visibility: visible;
@@ -297,7 +321,7 @@ input {
         position: absolute;
         height: 50px;
         width: 321px;
-        background-color: beige;
+        background-color: #ffffc3;
         border-radius: 50px;
         top: -55px;
         left: -10px;

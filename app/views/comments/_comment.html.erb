@@ -9,14 +9,25 @@
 
   <div class="reaction-cmt">
     <span class="like-btn">
-      <a href="#">Like</a>
+      <% if react_current_user(comment).nil? %>
+        <%= link_to "Like", reaction_comment_path(comment_id: comment.id, reaction: "Like"),
+                            id: "react-cmt#{comment.id}", 
+                            remote: true %>
+      <% else %>     
+        <%= link_to react_current_user(comment).reactions,
+                    reaction_comment_path(comment_id: comment.id, 
+                                          reaction: react_current_user(comment).reactions),
+                    class: react_current_user(comment).reactions,
+                    id: "react-cmt#{comment.id}",
+                    remote: true %>
+      <% end %>
       <div class="reactions-box">
-        <span><a class="reaction reaction-like" href="#"></a> </span>
-        <span><a class="reaction reaction-love" href="#"></a> </span>
-        <span><a class="reaction reaction-haha" href="#"></a> </span>
-        <span><a class="reaction reaction-wow" href="#"></a> </span>
-        <span><a class="reaction reaction-sad" href="#"></a> </span>
-        <span><a class="reaction reaction-angry" href="#"></a> </span>
+        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Like"),class:"reaction reaction-like", remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Love"),class:"reaction reaction-love",remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Haha"),class:"reaction reaction-haha", remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Wow"),class:"reaction reaction-wow", remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Sad"),class:"reaction reaction-sad", remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Angry"),class:"reaction reaction-angry", remote: true %> </span>
       </div>
     </span> 
     &nbsp.&nbsp
