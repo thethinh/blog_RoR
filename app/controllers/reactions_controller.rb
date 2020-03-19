@@ -10,7 +10,7 @@ class ReactionsController < ApplicationController
       if @reaction.save
         respond_to do |format|
           format.html
-          format.js
+          format.js{ render 'reaction_comment.js.erb' }
         end
       end
     else
@@ -20,14 +20,14 @@ class ReactionsController < ApplicationController
         @reaction.destroy
         respond_to do |format|
           format.html
-          format.js
+          format.js{ render 'react_cmt_destroy.js.erb' }
         end
       else
         # update react mới
         @reaction.update_attributes(reactions: params[:reaction])
         respond_to do |format|
           format.html
-          format.js
+          format.js{ render 'reaction_comment.js.erb' }
         end
       end
     end
