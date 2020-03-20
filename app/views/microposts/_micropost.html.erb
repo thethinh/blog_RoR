@@ -20,9 +20,10 @@
       <%= render comment %>
     <% end %>
   </div>
-
-  <%= link_to "Show comment", micropost_comments_path(micropost), remote: true, class: "btn-showcmt#{micropost.id}" %>
-
+  
+  <% unless (micropost.comment.length <= 5 ) %>
+    <%= link_to "Show comment", micropost_comments_path(micropost), remote: true, class: "btn-showcmt#{micropost.id}" %>
+  <% end %>
   <%= render "comments/comment_form", {url_action: user_comments_path(current_user, micropost_id: micropost.id),
                                        method_controll: "POST",
                                        class_form_cmt: "typecmt #{micropost.id}" } %>
