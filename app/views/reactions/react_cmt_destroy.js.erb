@@ -1,3 +1,8 @@
-$("#react-cmt<%= @reaction.comment_id %>").text("Like");
-document.getElementById("react-cmt<%= @reaction.comment_id %>").classList.remove("<%= @reaction.reactions %>");
-document.getElementById("react-cmt<%= @reaction.comment_id %>").href = "/reaction_comment?comment_id=<%=@reaction.comment_id%>&reaction=Like"
+
+<% if @reaction.errors.any? %>
+  alert("Đã xảy ra lỗi , vui lòng thử lại sau !")
+<% else %>
+  $("#react-cmt<%= @reaction.comment_id %>").text("Like");
+  document.getElementById("react-cmt<%= @reaction.comment_id %>").classList.remove("<%= @reaction.reactions %>");
+  document.getElementById("react-cmt<%= @reaction.comment_id %>").href = "/reaction_comment?comment_id=<%=@reaction.comment_id%>&reaction=Like"
+<% end %>

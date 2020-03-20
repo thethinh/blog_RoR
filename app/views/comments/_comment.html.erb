@@ -9,17 +9,17 @@
 
   <div class="reaction-cmt">
     <span class="like-btn">
-      <% if react_current_user(comment).nil? %>
-        <%= link_to "Like", reaction_comment_path(comment_id: comment.id, reaction: "Like"),
-                            id: "react-cmt#{comment.id}", 
-                            remote: true %>
-      <% else %>     
-        <%= link_to react_current_user(comment).reactions,
+      <% if get_reaction_current_user(comment).present? %>
+        <%= link_to get_reaction_current_user(comment).reactions,
                     reaction_comment_path(comment_id: comment.id, 
-                                          reaction: react_current_user(comment).reactions),
-                    class: react_current_user(comment).reactions,
+                                          reaction: get_reaction_current_user(comment).reactions),
+                    class: get_reaction_current_user(comment).reactions,
                     id: "react-cmt#{comment.id}",
                     remote: true %>
+      <% else %>     
+        <%= link_to "Like", reaction_comment_path(comment_id: comment.id, reaction: "Like"),
+                            id: "react-cmt#{comment.id}", 
+                            remote: true %>       
       <% end %>
       <div class="reactions-box">
         <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Like"),class:"reaction reaction-like", remote: true %> </span>
