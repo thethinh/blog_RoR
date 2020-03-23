@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # POST routes
   post '/signup',  to: 'users#create'
   post '/login', to: 'sessions#create'
+  post '/create_subcmt', to: 'comments#create_subcmt'
 
   # DELETE routes
   delete '/logout', to: 'sessions#destroy'

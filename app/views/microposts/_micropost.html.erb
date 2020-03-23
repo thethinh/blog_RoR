@@ -16,7 +16,7 @@
   <hr>
 
   <div id="cmtpost<%= micropost.id %>">
-    <% micropost.comment.where(comment_id: nil).last(5).reverse.each do |comment|%>
+    <% micropost.comment.discriminate_cmt_and_subcmt.last(5).reverse.each do |comment|%>
       <% if comment.comment_id.nil? %>
         <%= render comment %>
       <% end %>

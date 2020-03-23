@@ -5,19 +5,19 @@
   <% end %>
 
   $("#<%= @subcomment[0].comment_id %>").append("<%= escape_javascript render "comments/comment_form",
-                                              { url_action: comments_path(micropost_id: @subcomment[0].micropost_id),
+                                              { url_action: create_subcmt_path(parent_id: @subcomment[0].comment_id),
                                                 method_controll: "POST",
-                                                class_form_cmt: "typecmt box-subcmt",
-                                                catagory_box_cmt: "area-box-subcmt"
+                                                class_form_cmt: "typecmt box-subcmt bsc#{@comment_current.id}",
+                                                catagory_box_cmt: "area-box-subcmt id=abs#{@comment_current.id}"
                                               } %>")
   $(".subcmt<%= @subcomment[0].comment_id %>").remove()
 <% else %>
   $("#<%= @comment_current.id %>").append("<%= escape_javascript render "comments/comment_form",
-                                              { url_action: comments_path(micropost_id: @comment_current.micropost_id),
-                                                method_controll: "POST",
-                                                class_form_cmt: "typecmt box-subcmt",
-                                                catagory_box_cmt: "area-box-subcmt"
-                                              } %>")
+                                        { url_action: create_subcmt_path(parent_id: @comment_current.id),
+                                          method_controll: "POST",
+                                          class_form_cmt: "typecmt box-subcmt bsc#{@comment_current.id}",
+                                          catagory_box_cmt: "area-box-subcmt id=abs#{@comment_current.id}"
+                                        } %>")
   document.getElementsByClassName("reply<%= @comment_current.id %>")[0].href=""
 <% end %>
 

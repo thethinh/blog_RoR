@@ -12,16 +12,35 @@ class CommentsController < ApplicationController
     end
   end
 
+  def create_subcmt
+    @comment_parent = Comment.find_by(id: params[:parent_id])
+    @comment = @comment_parent.subcomment.build(comment_params)
+    @comment.micropost_id = @comment_parent.id
+    @comment.user_id = current_user.id
+    if @comment.save
+      respond_to do |format|
+        format.html{render @subcomment}
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html{render @subcomment}
+        format.js
+      end
+    end
+  end
+  
+
   def index
     current_sum_cmt = params[:currentSumCmt].to_i
     @post = Micropost.find(params[:micropost_id])
 
     if(params[:currentSumCmt])
       # Nếu có số comment truyền lên thì lấy ra số  cmt = số cmt hiện tại + 4
-      @comment = @post.comment.where(comment_id: nil).last(current_sum_cmt + 4).reverse
+      @comment = @post.comment.discriminate_cmt_and_subcmt.last(current_sum_cmt + 4).reverse
     else
       #Nếu chưa có params truyền lên(lúc ban đầu) thì lấy ra 7 cmt (số comment ban đầu( mặc định 3) + 4)
-      @comment = @post.comment.where(comment_id: nil).last(7).reverse
+      @comment = @post.comment.discriminate_cmt_and_subcmt.last(7).reverse
     end
     respond_to do |format|
       format.html {redirect_to @comment}
