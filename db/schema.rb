@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_082748) do
+ActiveRecord::Schema.define(version: 2020_03_20_085246) do
 
   create_table "comments", force: :cascade do |t|
     t.string "body"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2020_03_18_082748) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "comment_id"
     t.index ["micropost_id"], name: "index_comments_on_micropost_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -40,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_03_18_082748) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["comment_id"], name: "index_reactions_on_comment_id"
+    t.index ["user_id", "comment_id"], name: "index_reactions_on_user_id_and_comment_id", unique: true
     t.index ["user_id"], name: "index_reactions_on_user_id"
   end
 

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get '/download/infor_csv', to: 'downloadcsvs#info_csv'
   get '/reaction_comment', to: 'reactions#reaction_comment'
+  get '/show_subcomment', to: 'comments#show_subcomment'
 
   # POST routes
   post '/signup',  to: 'users#create'
@@ -26,7 +27,7 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
-  resources :comments, only: [:destroy, :edit]
+  resources :comments, only: [:create, :destroy, :edit]
   resources :users do
     member do
       get :following, :followers
@@ -37,7 +38,7 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    resources :comments, only: [:create, :update]
+    resources :comments, only: [:update]
   end
 
 end

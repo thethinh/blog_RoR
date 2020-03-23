@@ -242,9 +242,24 @@ input {
     margin-right: 10px;
     margin-top: 5px;
   }
+  .area-box-subcmt{
+    margin-left: 57px;
+    display: flex;
+    margin-top: 8px;
+  }
+  .box-subcmt{
+    width: 591px;
+    height: 35px;
+    border-radius: 25px;
+    padding-left: 13px;
+    outline: none;
+    margin-bottom: 0px;
+    margin-top: 8px;;
+  }
   .box-comment{
     display: flex;
-    margin-top: 15px;
+    margin-top: 10px;
+    margin-left: 9px;
     .gravatar {
       height: 38px;
       width: 38px;
@@ -262,6 +277,20 @@ input {
     }
   }
   .area-cmt{
+    .area-btn-showsubcmt{
+      display: flex;
+      margin-top: 8px;
+      .icon-showsubcmt{
+        background-image: url(/other_arrow-right_other___2-512.png);
+        height: 12px;
+        width: 14px;
+        background-repeat: no-repeat;
+        margin-left: 65px;
+        background-size: cover;
+        margin-right: 12px;
+      }
+    }
+    
     .display-cmt{
       display: flex;
       width: 660px;
@@ -281,6 +310,9 @@ input {
           font-weight: bold;
         }
       }  
+    }
+    .subcmt-area{
+      margin-left: 48px;
     }
     .reaction-cmt{
       display: block;

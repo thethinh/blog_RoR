@@ -1,0 +1,50 @@
+<div class="subcmt-area", id="<%= comment.id %>">
+  <div class="display-cmt">
+    <%= link_to gravatar_for(comment.user, size: 38), comment.user %>
+    <p>
+      <%= link_to comment.user.name, comment.user %>
+      <%= comment.body %>
+    </p>
+  </div>
+
+  <div class="reaction-cmt">
+    <span class="like-btn">
+      <% if get_reaction_current_user(comment).present? %>
+        <%= link_to get_reaction_current_user(comment).reactions,
+                    reaction_comment_path(comment_id: comment.id, 
+                                          reaction: get_reaction_current_user(comment).reactions),
+                    class: get_reaction_current_user(comment).reactions,
+                    id: "react-cmt#{comment.id}",
+                    remote: true %>
+      <% else %>     
+        <%= link_to "Like", reaction_comment_path(comment_id: comment.id, reaction: "Like"),
+                            id: "react-cmt#{comment.id}", 
+                            remote: true %>       
+      <% end %>
+      <div class="reactions-box">
+        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Like"),class:"reaction reaction-like", remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Love"),class:"reaction reaction-love",remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Haha"),class:"reaction reaction-haha", remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Wow"),class:"reaction reaction-wow", remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Sad"),class:"reaction reaction-sad", remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Angry"),class:"reaction reaction-angry", remote: true %> </span>
+      </div>
+    </span> 
+      &nbsp.&nbsp
+      <span class="time-cmt">
+        <%= time_ago_in_words(comment.created_at) %> ago
+      </span>
+
+      <%# comment của chủ sở hữu được sửa %>
+      <% if comment_of_user?(comment) %> 
+          &nbsp.&nbsp
+        <%= link_to "Edit", edit_comment_path(comment), remote: true %>
+      <% end %>
+      
+      <%# Chủ sỡ hữu của một post có quyền xóa cmt trong đó hoặc chủ sở hữu cmt được xóa comment %>
+      <% if(comment_in_post_user?(comment) || comment_of_user?(comment)) %> 
+        &nbsp.&nbsp
+        <%= link_to "Delete", comment, method: :delete, data: { confirm: "You sure delete ?" }, remote: true %>
+      <% end %>
+  </div>
+</div> 
