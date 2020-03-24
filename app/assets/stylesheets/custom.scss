@@ -1,5 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 
 /* universal */
 
@@ -145,7 +148,7 @@ input, textarea, select, .uneditable-input {
 }
   
 input {
-    height: auto !important;
+    height: auto ;
 }
 
 .checkbox {
@@ -195,34 +198,261 @@ input {
 .microposts {
   list-style: none;
   padding: 0;
+  hr{
+    border-top: 1px solid #c7c3c3;
+  }
   li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    padding: 10px 0px;
+    border: 1px solid #e8e8e8;
+    background-color: #f7f7f7;
+    margin-top: 12px;
+    border-radius: 5px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
   .user {
-    margin-top: 5em;
-    padding-top: 0;
+    position: relative;
+    top: 5px;
   }
   .content {
     display: block;
-    margin-left: 60px;
+    margin-top: 30px;
+    margin-left: 5px;
     img {
       display: block;
       padding: 5px 0;
+      margin-top: 10px;
+    }
+    .gravatar{
+      float: left;
+      margin-right: 10px;
+      margin-top: 5px;
+      height: 30px;
+      width: 30px;
     }
   }
   .timestamp {
     color: $gray-light;
     display: block;
     margin-left: 60px;
+    margin-top: 5px;
   }
   .gravatar {
     float: left;
     margin-right: 10px;
     margin-top: 5px;
   }
+  .area-box-subcmt{
+    margin-left: 57px;
+    display: flex;
+    margin-top: 8px;
+  }
+  .box-subcmt{
+    width: 591px;
+    height: 35px;
+    border-radius: 25px;
+    padding-left: 13px;
+    outline: none;
+    margin-bottom: 0px;
+    margin-top: 8px;;
+  }
+  .box-comment{
+    display: flex;
+    margin-top: 10px;
+    margin-left: 9px;
+    .gravatar {
+      height: 38px;
+      width: 38px;
+      margin-top: 11px;
+      border-radius: 50%;
+    }
+    .typecmt{
+      position: relative;
+      top: 10px;
+      padding-left: 15px;
+      border-radius: 30px;
+      height: 38px;
+      outline: none;
+      width: 650px;
+    }
+  }
+  .area-cmt{
+    .area-btn-showsubcmt{
+      display: flex;
+      margin-top: 8px;
+      .icon-showsubcmt{
+        background-image: url(/other_arrow-right_other___2-512.png);
+        height: 12px;
+        width: 14px;
+        background-repeat: no-repeat;
+        margin-left: 65px;
+        background-size: cover;
+        margin-right: 12px;
+      }
+    }
+    
+    .display-cmt{
+      display: flex;
+      width: 660px;
+      margin-top: 8px;
+      margin-left: 8px;
+      
+      .gravatar{
+        border-radius: 50px;
+      }
+      p{
+        margin-top: 6px;
+        background-color: #8e8e8a26;
+        padding: 5px 10px 5px 10px;
+        border-radius: 15px;
+        word-break: break-all;
+        a{
+          font-weight: bold;
+        }
+      }  
+    }
+    .subcmt-area{
+      margin-left: 48px;
+    }
+    .reaction-cmt{
+      display: block;
+      margin-left: 62px;
+      margin-top: -8px;
+      .like-btn{
+        position: relative;
+        .Haha{
+          color: rgb(247, 177, 37);;
+          font-weight: bold;
+        }
+        .Love{
+          color: rgb(243, 62, 88);
+          font-weight: bold;
+        }
+        .Wow{
+          font-weight: bold;
+          color: rgb(247, 177, 37);
+        }
+        .Sad{
+          font-weight: bold;
+          color: rgb(247, 177, 37);
+        }
+        .Like{
+          font-weight: bold;
+          color: rgb(32, 120, 244);
+        }
+        .Angry{
+          font-weight: bold;
+          color: rgb(233, 113, 15);
+        }
+      }
+      .like-btn:hover .reactions-box{
+        visibility: visible;
+        opacity: 1;
+      }
+      .reactions-box{
+        position: absolute;
+        height: 50px;
+        width: 321px;
+        background-color: #ffffc3;
+        border-radius: 50px;
+        top: -55px;
+        left: -10px;
+        display: flex;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility .05s, opacity 0.5s linear;
+        .reaction{
+          list-style-type: none;
+          height: 42px;
+          width: 42px;
+          margin-top: 3.6px;
+          display: block;
+          transition: all ease-in-out 0.1s;
+        }
+        .reaction:hover {
+          margin-top: -1.6px;
+          transform: scale(1.2,1.2);
+        } 
+        .reaction::before {
+          display: inline-block;
+          color: #ffffff;
+          text-align: center;
+          line-height: 17px;
+          font-size: .8em;
+          width: 36px;
+          height: 17px;
+          background-color: rgba(0, 0, 0, 0.6);
+          border-radius: 20px;
+          position: absolute;
+          top: -25px;
+          font-weight: bold;
+          margin-left: 3px;
+          opacity: 0;
+          transition: opacity .2s ease-in-out 0s;
+        }
+        .reaction:hover::before {
+          opacity: 1
+        }        
+        .reaction-like{
+          background-image: url('/reactions/reactions_like.png');
+          background-size: cover;
+          margin-left: 12px;
+        }
+        .reaction-like::before{
+          content: "Like";
+        }
+        .reaction-love{
+          background-image: url('/reactions/reactions_love.png');
+          background-size: cover;
+          margin-left: 9px;
+        }
+        .reaction-love::before{
+          content: "Love";
+          
+        }
+        .reaction-haha{
+          background-image: url('/reactions/reactions_haha.png');
+          background-size: cover;
+          margin-left: 9px;
+        }
+        .reaction-haha::before{
+          content: "Haha";
+        }
+        .reaction-wow{
+          background-image: url('/reactions/reactions_wow.png');
+          background-size: cover;
+          margin-left: 9px;
+        }
+        .reaction-wow::before{
+          content: "Wow";
+        }
+        .reaction-sad{
+          background-image: url('/reactions/reactions_sad.png');
+          background-size: cover;
+          margin-left: 9px;
+        }
+        .reaction-sad::before{
+          content: "Sad";
+        }
+        .reaction-angry{
+          background-image: url('/reactions/reactions_angry.png');
+          background-size: cover;
+          margin-left: 9px;
+        }
+        .reaction-angry::before{
+          content: "Angry";
+        }
+      }
+      a{
+        font-size: 13px;
+        opacity: 0.9;
+      }
+      .time-cmt{
+        color: #868688;
+      }
+    }
+  }
 }
-
 aside {
   textarea {
     height: 100px;

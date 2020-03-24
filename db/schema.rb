@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_20_010853) do
+ActiveRecord::Schema.define(version: 2020_03_20_085246) do
+
+  create_table "comments", force: :cascade do |t|
+    t.string "body"
+    t.string "picture"
+    t.integer "micropost_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "comment_id"
+    t.index ["micropost_id"], name: "index_comments_on_micropost_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "microposts", force: :cascade do |t|
     t.text "content"
@@ -20,6 +32,17 @@ ActiveRecord::Schema.define(version: 2020_02_20_010853) do
     t.string "picture"
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "reactions", force: :cascade do |t|
+    t.integer "reactions"
+    t.integer "user_id", null: false
+    t.integer "comment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_reactions_on_comment_id"
+    t.index ["user_id", "comment_id"], name: "index_reactions_on_user_id_and_comment_id", unique: true
+    t.index ["user_id"], name: "index_reactions_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -47,5 +70,9 @@ ActiveRecord::Schema.define(version: 2020_02_20_010853) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "comments", "microposts"
+  add_foreign_key "comments", "users"
   add_foreign_key "microposts", "users"
+  add_foreign_key "reactions", "comments"
+  add_foreign_key "reactions", "users"
 end

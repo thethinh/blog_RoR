@@ -1,0 +1,6 @@
+
+<% if @comment.errors.any? %>
+  alert("comment not blank!, please see again.");
+<% else %>
+  $("#<%= @comment.id %>").html("<%= escape_javascript render @comment %>")
+<% end %>

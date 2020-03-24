@@ -1,0 +1,13 @@
+<% if @comment.comment_id.nil? %>
+  $("#<%= @comment.id %>").html("<%= escape_javascript render 'comments/comment_form', 
+                                      { url_action: user_comment_path(current_user, @comment),
+                                        method_controll: "PATCH",
+                                        class_form_cmt: "typecmt #{@comment.micropost.id}",
+                                        catagory_box_cmt: "box-comment" } %>")
+<% else %>
+  $("#<%= @comment.id %>").html("<%= escape_javascript render 'comments/comment_form', 
+                                      { url_action: user_comment_path(current_user, @comment),
+                                        method_controll: "PATCH",
+                                        class_form_cmt: "box-subcmt #{@comment.micropost.id}",
+                                        catagory_box_cmt: "box-comment" } %>")
+<% end %>

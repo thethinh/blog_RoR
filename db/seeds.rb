@@ -51,3 +51,12 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+#comment for first post of first user
+users = User.all
+post = users.first.microposts.first
+usercmt = users[2..10]
+usercmt.each { |usercmt| usercmt.comment.create!(
+  micropost_id: post.id,
+  body: "Hello everyone !"
+) }

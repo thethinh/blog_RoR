@@ -11,10 +11,13 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#access_omniAuth'
   get 'auth/failure', to: redirect('/')
   get '/download/infor_csv', to: 'downloadcsvs#info_csv'
+  get '/reaction_comment', to: 'reactions#reaction_comment'
+  get '/show_subcomment', to: 'comments#show_subcomment'
 
   # POST routes
   post '/signup',  to: 'users#create'
   post '/login', to: 'sessions#create'
+  post '/create_subcmt', to: 'comments#create_subcmt'
 
   # DELETE routes
   delete '/logout', to: 'sessions#destroy'
@@ -25,9 +28,18 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
+  resources :comments, only: [:create, :destroy, :edit]
   resources :users do
     member do
       get :following, :followers
     end
   end
+  resources :microposts do
+    resources :comments, only: [:index]
+  end
+
+  resources :users do
+    resources :comments, only: [:update]
+  end
+
 end
