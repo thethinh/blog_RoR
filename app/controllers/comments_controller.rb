@@ -37,10 +37,10 @@ class CommentsController < ApplicationController
 
     if(params[:currentSumCmt])
       # Nếu có số comment truyền lên thì lấy ra số  cmt = số cmt hiện tại + 4
-      @comment = @post.comment.discriminate_cmt_and_subcmt.last(current_sum_cmt + 4).reverse
+      @comment = @post.comment.select_parent_comment.last(current_sum_cmt + 4).reverse
     else
       #Nếu chưa có params truyền lên(lúc ban đầu) thì lấy ra 7 cmt (số comment ban đầu( mặc định 3) + 4)
-      @comment = @post.comment.discriminate_cmt_and_subcmt.last(7).reverse
+      @comment = @post.comment.select_parent_comment.last(7).reverse
     end
     respond_to do |format|
       format.html {redirect_to @comment}

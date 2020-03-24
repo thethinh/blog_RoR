@@ -16,14 +16,12 @@
   <hr>
 
   <div id="cmtpost<%= micropost.id %>">
-    <% micropost.comment.discriminate_cmt_and_subcmt.last(5).reverse.each do |comment|%>
-      <% if comment.comment_id.nil? %>
-        <%= render comment %>
-      <% end %>
+    <% micropost.comment.select_parent_comment.last(5).reverse.each do |comment|%>
+      <%= render comment %>
     <% end %>
   </div>
   
-  <% unless (micropost.comment.where(comment_id: nil).length <= 5 ) %>
+  <% unless (micropost.comment.select_parent_comment.length <= 5 ) %>
     <%= link_to "Show comment", micropost_comments_path(micropost), remote: true, class: "btn-showcmt#{micropost.id}" %>
   <% end %>
   <%= render "comments/comment_form", {url_action: comments_path(micropost_id: micropost.id),

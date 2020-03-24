@@ -6,6 +6,6 @@ class Comment < ApplicationRecord
 
   validates :body, presence: true
 
-  scope :discriminate_cmt_and_subcmt, -> { where(comment_id: nil) }
+  scope :select_parent_comment, -> { where(comment_id: nil) }
   # Ex:- scope :active, -> {where(:active => true)}
 end

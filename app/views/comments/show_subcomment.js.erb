@@ -11,6 +11,7 @@
                                                 catagory_box_cmt: "area-box-subcmt id=abs#{@comment_current.id}"
                                               } %>")
   $(".subcmt<%= @subcomment[0].comment_id %>").remove()
+  document.getElementsByClassName("reply<%= @comment_current.id %>")[0].href=""
 <% else %>
   $("#<%= @comment_current.id %>").append("<%= escape_javascript render "comments/comment_form",
                                         { url_action: create_subcmt_path(parent_id: @comment_current.id),
