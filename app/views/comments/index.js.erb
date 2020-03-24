@@ -1,6 +1,6 @@
 $("#cmtpost<%= @comment[0].micropost_id %>").html("<%= escape_javascript render(@comment) %>");
 
-<% if @comment.length >= @post.comment.length %>
+<% if @comment.length >= @post.comment.select_parent_comment.length %>
   $(".btn-showcmt<%= @comment[0].micropost_id %>").html("");
 <% else %>
   $(".btn-showcmt<%= @comment[0].micropost_id %>")[0].setAttribute("href", "<%= micropost_comments_path(@comment[0].micropost_id, currentSumCmt: @comment.length) %>");
