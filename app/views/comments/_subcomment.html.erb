@@ -42,7 +42,7 @@
       <% end %>
       
       <%# Chủ sỡ hữu của một post có quyền xóa cmt trong đó hoặc chủ sở hữu cmt được xóa comment %>
-      <% if(comment_in_post_user?(comment) || comment_of_user?(comment)) %> 
+      <% if(comment_in_post_user?(comment) || comment_of_user?(comment) || subcmt_of_cmt_current_user?(comment)) %> 
         &nbsp.&nbsp
         <%= link_to "Delete", comment, method: :delete, data: { confirm: "You sure delete ?" }, remote: true %>
       <% end %>
