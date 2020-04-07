@@ -42,4 +42,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:update]
   end
 
+  # Action cable
+  mount ActionCable.server, at: '/cable'
+
 end

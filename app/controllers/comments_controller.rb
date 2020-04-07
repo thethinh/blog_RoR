@@ -52,6 +52,10 @@ class CommentsController < ApplicationController
     @comment = current_user.comment.build(comment_params)
     @comment.micropost_id = params[:micropost_id]
     if @comment.save
+      if @comment.micropost.user_id != current_user.id
+        ActionCable.server.broadcast "notifications_channel_#{@comment.micropost.user_id}",
+          content: "#{current_user.name} đã comment vào một bài viết của bạn"
+      end
       respond_to do |format|
         format.html{render @comment}
         format.js
@@ -103,7 +107,7 @@ class CommentsController < ApplicationController
   def correct_cmt_user
     @comment = Comment.find_by(id: params[:id])
     
-    if (@comment.nil? || (!comment_in_post_user?(@comment) && !comment_of_user?(@comment)))
+    if (@comment.nil? || (!comment_in_post_user?(@comment) && !comment_of_user?(@comment) && !subcmt_of_cmt_current_user?(@comment)))
       redirect_to root_url 
     end
   end
