@@ -6,6 +6,12 @@ class ReactionsController < ApplicationController
       # nếu chưa có, tạo mới react và lưu vào trong db
       @reaction = current_user.reaction.build(comment_id: params[:comment_id], reactions: params[:reaction] )
       if @reaction.save
+
+        # Thông báo tới user được react comment
+        unless react_cmt_of_me?
+          ActionCable.server.broadcast "notifications_channel_#{@reaction.comment.user_id}",
+            content: "#{current_user.name} đã bày tỏ cảm xúc về một bình luận của bạn"
+        end
         respond_to do |format|
           format.html
           format.js{ render 'reaction_comment.js.erb' }
@@ -47,4 +53,11 @@ class ReactionsController < ApplicationController
       end
     end
   end
+
+  private
+
+  def react_cmt_of_me?
+    @reaction.comment.user_id == current_user.id
+  end
+  
 end

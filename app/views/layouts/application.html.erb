@@ -2,6 +2,8 @@
 <html>
   <head>
     <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', "data-turbolinks-track" => true  %>
     <%= render 'layouts/shim' %>
@@ -15,5 +17,15 @@
       <%= yield %>
       <%= render 'layouts/footer' %>
     </div>
+
+    <div class="notifications-box">
+      <div class="alert alert-success alert-dismissible" id="notifications-alert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <div class="text-notification">
+          
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>

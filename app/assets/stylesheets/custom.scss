@@ -53,6 +53,18 @@ font-size: 1.1em;
 line-height: 1.7em;
 }
 
+/* notifications */
+.notifications-box{
+  width: 250px;
+  position: fixed;
+  bottom: 10px;
+  left: 40px;
+}
+#notifications-alert{
+  display: none;
+}
+
+
 /* header */
 
 #logo {
