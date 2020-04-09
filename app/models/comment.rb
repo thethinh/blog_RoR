@@ -7,5 +7,4 @@ class Comment < ApplicationRecord
   validates :body, presence: true
 
   scope :select_parent_comment, -> { where(comment_id: nil) }
-  # Ex:- scope :active, -> {where(:active => true)}
 end
