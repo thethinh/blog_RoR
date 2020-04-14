@@ -1,4 +1,7 @@
 class ReactionsController < ApplicationController
+
+  include ReactionsHelper
+
   def reaction_comment
     # check xem curren_user đã react comment này chưa
     @reaction = current_user.reaction.find_by(comment_id: params[:comment_id])
@@ -11,7 +14,7 @@ class ReactionsController < ApplicationController
           content = "#{current_user.name} đã bày tỏ cảm xúc về một bình luận của bạn"
           ActionCable.server.broadcast "notifications_channel_#{@reaction.comment.user_id}",
             content: content
-          NotificationsMailer.notifications_from_app(@reaction.comment.user, content).deliver_now
+          NotificationsToEmailJob.perform_later(@reaction.comment.user, content)
         end
         respond_to do |format|
           format.html
@@ -53,12 +56,5 @@ class ReactionsController < ApplicationController
         end
       end
     end
-  end
-
-  private
-
-  def react_cmt_of_me?
-    @reaction.comment.user_id == current_user.id
-  end
-  
+  end  
 end

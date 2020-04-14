@@ -22,23 +22,23 @@ class CommentsController < ApplicationController
       # reply sẽ thông báo tới cả chủ post, trừ trường hợp chủ post là người reply
       # nếu chủ comment được reply trùng với chủ post thì chỉ thông báo phản hồi bình luận
       unless reply_to_cmt_of_me?(@comment_parent)
-        content1 = "#{current_user.name} đã trả lời một bình luận của bạn"
+        content_repcomment = "#{current_user.name} đã trả lời một bình luận của bạn"
         ActionCable.server.broadcast "notifications_channel_#{@comment_parent.user_id}",
-          content: content1
-        Thread.new {send_notifications_to_email(@comment_parent.user,content1)}
+          content: content_repcomment
+        NotificationsToEmailJob.perform_later(@comment_parent.user,content_repcomment)
 
         if (!comment_to_post_of_me? && (@comment_parent.user_id != @comment_parent.micropost.user_id ))
-          content2 = "#{current_user.name} đã comment vào một post của bạn"
+          content_createcmt = "#{current_user.name} đã comment vào một post của bạn"
           ActionCable.server.broadcast "notifications_channel_#{@comment.micropost.user_id}",
-            content: content2
-          Thread.new {send_notifications_to_email(@comment.micropost.user,content2)}
+            content: content_createcmt
+          NotificationsToEmailJob.perform_later(@comment.micropost.user,content_createcmt)
         end
       else
         unless comment_to_post_of_me?
           content = "#{current_user.name} đã comment vào một post của bạn"
           ActionCable.server.broadcast "notifications_channel_#{@comment.micropost.user_id}",
             content: content
-          send_notifications_to_email(@comment.micropost.user,content)
+          NotificationsToEmailJob.perform_later(@comment.micropost.user,content)
         end
       end
       respond_to do |format|
@@ -80,7 +80,7 @@ class CommentsController < ApplicationController
         content = "#{current_user.name} đã comment vào một bài viết của bạn"
         ActionCable.server.broadcast "notifications_channel_#{@comment.micropost.user_id}",
           content: content
-        send_notifications_to_email(@comment.micropost.user,content)
+        NotificationsToEmailJob.perform_later(@comment.micropost.user,content)
       end
       respond_to do |format|
         format.html{render @comment}
@@ -137,20 +137,4 @@ class CommentsController < ApplicationController
       redirect_to root_url 
     end
   end
-
-  # check tra xem có comment vào post của chính mình hay không ?
-  def comment_to_post_of_me?
-    @comment.micropost.user_id == current_user.id
-  end
-
-  # check tra xem có reply comment của chính mình hay không ?
-  def reply_to_cmt_of_me?(comment)
-    comment.user_id == current_user.id
-  end
-
-  # Sends notifications to email user
-  def send_notifications_to_email(user, content)
-    NotificationsMailer.notifications_from_app(user, content).deliver_now
-  end
-    
 end
