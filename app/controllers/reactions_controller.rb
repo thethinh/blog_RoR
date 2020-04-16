@@ -12,19 +12,14 @@ class ReactionsController < ApplicationController
         # Thông báo tới user được react comment
         unless react_cmt_of_me?
           content = "#{current_user.name} đã bày tỏ cảm xúc về một bình luận của bạn"
-          ActionCable.server.broadcast "notifications_channel_#{@reaction.comment.user_id}",
-            content: content
-          NotificationsToEmailJob.perform_later(@reaction.comment.user, content)
+          SendNotificationsService.new(content, @reaction.comment.user_id, @reaction.comment.user).send_notifications
         end
         respond_to do |format|
           format.html
           format.js{ render 'reaction_comment.js.erb' }
         end
       else
-        respond_to do |format|
-          format.html
-          format.js{ render 'reaction_comment.js.erb' }
-        end
+        render 'static_pages/error_page'
       end
     else
       # nếu đã react, check xem react cũ có trùng với react được gửi lên trong params hay k ?
@@ -36,10 +31,7 @@ class ReactionsController < ApplicationController
             format.js{ render 'react_cmt_destroy.js.erb' }
           end
         else
-          respond_to do |format|
-            format.html
-            format.js{ render 'react_cmt_destroy.js.erb' }
-          end
+          render 'static_pages/error_page'
         end
       else
         # update react mới
@@ -49,10 +41,7 @@ class ReactionsController < ApplicationController
             format.js{ render 'reaction_comment.js.erb' }
           end
         else
-          respond_to do |format|
-            format.html
-            format.js{ render 'reaction_comment.js.erb' }
-          end
+          render 'static_pages/error_page'
         end
       end
     end
