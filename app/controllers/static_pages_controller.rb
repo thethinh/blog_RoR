@@ -12,7 +12,7 @@ class StaticPagesController < ApplicationController
   end
 
   def error_page
-    render 'static_pages/error_page'
+    
   end
   
 end
