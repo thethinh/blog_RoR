@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
     else
-      render 'new'
+      render 'static_pages/error_page'
     end
   end
 
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
       flash[:success] = "Profile updated"
       redirect_to @user
     else
-      render 'edit'
+      render 'static_pages/error_page'
     end
   end
 
