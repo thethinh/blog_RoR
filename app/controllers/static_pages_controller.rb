@@ -10,4 +10,9 @@ class StaticPagesController < ApplicationController
   def help
     # code here
   end
+
+  def error_page
+    
+  end
+  
 end

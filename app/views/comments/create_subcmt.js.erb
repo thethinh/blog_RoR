@@ -1,0 +1,7 @@
+<% if @comment.errors.any? %>
+  alert("Đã xảy ra lỗi, vui lòng thử lại sau !")
+<% else %>
+  $("#abs<%= @comment_parent.id %>").before("<%= escape_javascript render 'comments/subcomment', {comment: @comment} %>");
+
+  $(".bsc<%= @comment_parent.id %>")[0].value =""
+<% end %>
