@@ -10,7 +10,7 @@
                                                 class_form_cmt: "typecmt box-subcmt bsc#{@comment_current.id}",
                                                 catagory_box_cmt: "area-box-subcmt id=abs#{@comment_current.id}"
                                               } %>")
-  $(".subcmt<%= @subcomment[0].comment_id %>").remove()
+  $(".subcmt<%= @subcomment[0].comment_id %>").remove() <%# hidden show subcomment button  %>
   document.getElementsByClassName("reply<%= @comment_current.id %>")[0].href=""
 <% else %>
   $("#<%= @comment_current.id %>").append("<%= escape_javascript render "comments/comment_form",
