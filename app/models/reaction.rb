@@ -8,6 +8,7 @@ class Reaction < ApplicationRecord
     Haha: 2,
     Wow: 3,
     Sad: 4,
-    Angry: 5
+    Angry: 5,
+    Care: 6
   }
 end

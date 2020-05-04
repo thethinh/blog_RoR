@@ -24,6 +24,7 @@
       <div class="reactions-box">
         <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Like"),class:"reaction reaction-like", remote: true %> </span>
         <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Love"),class:"reaction reaction-love",remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Care"),class:"reaction reaction-care",remote: true %> </span>
         <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Haha"),class:"reaction reaction-haha", remote: true %> </span>
         <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Wow"),class:"reaction reaction-wow", remote: true %> </span>
         <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Sad"),class:"reaction reaction-sad", remote: true %> </span>
