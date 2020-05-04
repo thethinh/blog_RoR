@@ -340,6 +340,10 @@ input {
           color: rgb(243, 62, 88);
           font-weight: bold;
         }
+        .Care{
+          font-weight: bold;
+          color: rgb(247, 177, 37);
+        }
         .Wow{
           font-weight: bold;
           color: rgb(247, 177, 37);
@@ -364,7 +368,7 @@ input {
       .reactions-box{
         position: absolute;
         height: 50px;
-        width: 321px;
+        width: 371px;
         background-color: #ffffc3;
         border-radius: 50px;
         top: -55px;
@@ -420,6 +424,15 @@ input {
         }
         .reaction-love::before{
           content: "Love";
+          
+        }
+        .reaction-care{
+          background-image: url('/reactions/reactions_care.png');
+          background-size: cover;
+          margin-left: 9px;
+        }
+        .reaction-care::before{
+          content: "Care";
           
         }
         .reaction-haha{
