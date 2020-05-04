@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get '/download/infor_csv', to: 'downloadcsvs#info_csv'
   get '/reaction_comment', to: 'reactions#reaction_comment'
   get '/show_subcomment', to: 'comments#show_subcomment'
-  get 'static_pages/error_page', to: 'static_pages#error_page'
+  get '/static_pages/error_page', to: 'static_pages#error_page'
 
   # POST routes
   post '/signup',  to: 'users#create'
