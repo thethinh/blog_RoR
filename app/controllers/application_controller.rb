@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :get_conversations
   include SessionsHelper
 
   private
@@ -12,4 +13,12 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+
+  def get_conversations
+    if logged_in?
+      session[:conversations] ||= []
+      @conversations = Conversation.includes(:messages).find(session[:conversations])
+    end
+  end
+  
 end

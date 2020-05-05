@@ -1,0 +1,11 @@
+// Place all the styles related to the conversations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.area-chat{
+  position: fixed;
+  bottom: -30px;
+  right: 15px;
+  li{
+    list-style-type: none;
+  }
+}

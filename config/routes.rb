@@ -43,6 +43,14 @@ Rails.application.routes.draw do
     resources :comments, only: [:update]
   end
 
+  resources :conversations, only: [:create] do
+    member do
+      post :close
+    end
+    resources :messages, only: [:create]
+  end
+
+
   # Action cable
   mount ActionCable.server, at: '/cable'
 
