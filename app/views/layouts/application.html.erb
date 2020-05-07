@@ -37,5 +37,12 @@
         </ul>
       </div>
     <% end %>
+
+    <script>
+      var elem_messages_list = document.getElementsByClassName('messages-list');
+      for(let i=0; i < elem_messages_list.length; ++i){
+        elem_messages_list[i].scrollTop = elem_messages_list[i].scrollHeight;
+      }
+    </script>
   </body>
 </html>

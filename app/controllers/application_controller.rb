@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def get_conversations
     if logged_in?
       session[:conversations] ||= []
-      @conversations = Conversation.includes(:messages).find(session[:conversations])
+      @conversations = Conversation.includes(:messages).find(session[:conversations]).last(3)
     end
   end
   
