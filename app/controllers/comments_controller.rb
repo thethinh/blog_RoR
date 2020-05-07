@@ -126,7 +126,6 @@ class CommentsController < ApplicationController
   def correct_cmt_user
     if logged_in?
       @comment = Comment.find_by(id: params[:id])
-      
       if (@comment.nil? || (!comment_in_post_user?(@comment) && !comment_of_user?(@comment) && !subcmt_of_cmt_current_user?(@comment)))
         redirect_to static_pages_error_page_url 
       end
