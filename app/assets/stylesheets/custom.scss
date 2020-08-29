@@ -8,6 +8,8 @@
 
 body {
     padding-top: 60px;
+    background-image: url(/Back_Ground.jpg);
+    background-size: cover;
   }
   
 section {
@@ -89,7 +91,8 @@ footer {
     margin-top: 45px;
     padding-top: 5px;
     border-top: 1px solid #eaeaea;
-    color: #777;
+    color: #555;
+    font-weight: bold;
   }
 
 footer a {
