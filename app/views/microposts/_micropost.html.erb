@@ -15,6 +15,20 @@
 
   <hr>
 
+  <span>
+    <a class="button-micropost" href="#"> 
+      <i class="far fa-thumbs-up"></i>
+      Like
+    </a>
+
+    <a class="button-micropost" href="#">
+      <i class="far fa-comment-alt"></i>
+      Comment
+    </a>
+  </span>
+
+  <hr style="width: 749px; margin-left: -13px; position: relative; top: -10px">
+
   <div id="cmtpost<%= micropost.id %>">
     <% micropost.comment.select_parent_comment.last(5).reverse.each do |comment|%>
       <%= render comment %>
@@ -24,6 +38,7 @@
   <% unless (micropost.comment.select_parent_comment.length <= 5 ) %>
     <%= link_to "Show comment", micropost_comments_path(micropost), remote: true, class: "btn-showcmt#{micropost.id}" %>
   <% end %>
+
   <%= render "comments/comment_form", {url_action: comments_path(micropost_id: micropost.id),
                                        method_controll: "POST",
                                        class_form_cmt: "typecmt #{micropost.id}",

@@ -16,7 +16,7 @@ gem 'omniauth-google-oauth2'
 gem "omniauth-facebook"
 gem 'rubocop-rails', require: false
 gem "rubyzip"
-gem 'font-awesome-sass', '~> 5.12.0'
+gem 'font-awesome-sass'
 gem "sidekiq"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
