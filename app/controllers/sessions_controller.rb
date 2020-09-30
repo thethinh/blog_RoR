@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   def new
     # code here
@@ -11,8 +13,8 @@ class SessionsController < ApplicationController
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         redirect_back_or user
       else
-        message = "Account not activated."
-        message += "Check your email for the activation link."
+        message = 'Account not activated.'
+        message += 'Check your email for the activation link.'
         flash[:warning] = message
         redirect_to root_url
       end
@@ -29,7 +31,7 @@ class SessionsController < ApplicationController
 
   def access_omniAuth
     # Get access tokens from the google server
-    access_token = request.env["omniauth.auth"]
+    access_token = request.env['omniauth.auth']
     user = User.from_omniauth(access_token)
     if user.save
       log_in user

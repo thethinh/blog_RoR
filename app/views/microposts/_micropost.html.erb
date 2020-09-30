@@ -30,12 +30,12 @@
   <hr style="width: 749px; margin-left: -13px; position: relative; top: -10px">
 
   <div id="cmtpost<%= micropost.id %>">
-    <% micropost.comment.select_parent_comment.last(5).reverse.each do |comment|%>
+    <% micropost.comment.select_parent_comment.last(3).reverse.each do |comment|%>
       <%= render comment %>
     <% end %>
   </div>
   
-  <% unless (micropost.comment.select_parent_comment.length <= 5 ) %>
+  <% unless (micropost.comment.select_parent_comment.length <= 3 ) %>
     <%= link_to "Show comment", micropost_comments_path(micropost), remote: true, class: "btn-showcmt#{micropost.id}" %>
   <% end %>
 

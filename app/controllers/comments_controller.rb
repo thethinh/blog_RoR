@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   include CommentsHelper
 
-  before_action :correct_cmt_user, only: [:destroy, :edit, :update] 
+  before_action :correct_cmt_user, only: %i[destroy edit update]
 
   def show_subcomment
     @comment_current = Comment.find_by(id: params[:comment_id])
     @subcomment = Comment.where(comment_id: params[:comment_id])
     respond_to do |format|
-      format.html{render @subcomment}
+      format.html { render @subcomment }
       format.js
     end
   end
@@ -21,45 +23,45 @@ class CommentsController < ApplicationController
       # trả lời comment sẽ thông báo tới user có comment được reply, nếu reply comment của chính mình sẽ k có
       # reply sẽ thông báo tới cả chủ post, trừ trường hợp chủ post là người reply
       # nếu chủ comment được reply trùng với chủ post thì chỉ thông báo phản hồi bình luận
-      unless reply_to_cmt_of_me?(@comment_parent)
-        content_repcomment = "#{current_user.name} đã trả lời một bình luận của bạn"
-        SendNotificationsService.new(content_repcomment, @comment_parent.user_id, @comment_parent.user).send_notifications
-        
-        if (!comment_to_post_of_me? && (@comment_parent.user_id != @comment_parent.micropost.user_id ))
-          content_createcmt = "#{current_user.name} đã comment vào một post của bạn"
-          SendNotificationsService.new(content_createcmt, @comment.micropost.user_id, @comment.micropost.user).send_notifications
-        end
-      else
+      if reply_to_cmt_of_me?(@comment_parent)
         unless comment_to_post_of_me?
           content = "#{current_user.name} đã comment vào một post của bạn"
           SendNotificationsService.new(content, @comment.micropost.user_id, @comment.micropost.user).send_notifications
         end
+      else
+        content_repcomment = "#{current_user.name} đã trả lời một bình luận của bạn"
+        SendNotificationsService.new(content_repcomment, @comment_parent.user_id, @comment_parent.user).send_notifications
+
+        if !comment_to_post_of_me? && (@comment_parent.user_id != @comment_parent.micropost.user_id)
+          content_createcmt = "#{current_user.name} đã comment vào một post của bạn"
+          SendNotificationsService.new(content_createcmt, @comment.micropost.user_id, @comment.micropost.user).send_notifications
+        end
       end
       respond_to do |format|
-        format.html{render @subcomment}
+        format.html { render @subcomment }
         format.js
       end
     else
       respond_to do |format|
-        format.html{render @subcomment}
+        format.html { render @subcomment }
         format.js
       end
     end
   end
-  
+
   def index
     current_sum_cmt = params[:currentSumCmt].to_i
     @post = Micropost.find(params[:micropost_id])
 
-    if(params[:currentSumCmt])
+    if params[:currentSumCmt]
       # Nếu có số comment truyền lên thì lấy ra số  cmt = số cmt hiện tại + 4
       @comment = @post.comment.select_parent_comment.last(current_sum_cmt + 4).reverse
     else
-      #Nếu chưa có params truyền lên(lúc ban đầu) thì lấy ra 7 cmt (số comment ban đầu( mặc định 3) + 4)
+      # Nếu chưa có params truyền lên(lúc ban đầu) thì lấy ra 7 cmt (số comment ban đầu( mặc định 3) + 4)
       @comment = @post.comment.select_parent_comment.last(7).reverse
     end
     respond_to do |format|
-      format.html {redirect_to @comment}
+      format.html { redirect_to @comment }
       format.js
     end
   end
@@ -74,14 +76,14 @@ class CommentsController < ApplicationController
         SendNotificationsService.new(content, @comment.micropost.user_id, @comment.micropost.user).send_notifications
       end
       respond_to do |format|
-        format.html{render @comment}
+        format.html { render @comment }
         format.js
       end
     else
       respond_to do |format|
-        format.html{render @comment}
+        format.html { render @comment }
         format.js
-      end   
+      end
     end
   end
 
@@ -97,8 +99,8 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    respond_to  do |format|
-      format.html{render @comment}
+    respond_to do |format|
+      format.html { render @comment }
       format.js
     end
   end
@@ -106,17 +108,17 @@ class CommentsController < ApplicationController
   def update
     if @comment.update_attributes(comment_params)
       respond_to do |format|
-        format.html{render @comment}
+        format.html { render @comment }
         format.js
       end
     else
       respond_to do |format|
-        format.html{render @comment}
+        format.html { render @comment }
         format.js
       end
     end
   end
-  
+
   private
 
   def comment_params
@@ -126,8 +128,8 @@ class CommentsController < ApplicationController
   def correct_cmt_user
     if logged_in?
       @comment = Comment.find_by(id: params[:id])
-      if (@comment.nil? || (!comment_in_post_user?(@comment) && !comment_of_user?(@comment) && !subcmt_of_cmt_current_user?(@comment)))
-        redirect_to static_pages_error_page_url 
+      if @comment.nil? || (!comment_in_post_user?(@comment) && !comment_of_user?(@comment) && !subcmt_of_cmt_current_user?(@comment))
+        redirect_to static_pages_error_page_url
       end
     end
   end

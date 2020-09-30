@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessagesController < ApplicationController
   def create
     @conversation = Conversation.includes(:recipient).find(params[:conversation_id])
@@ -6,8 +8,8 @@ class MessagesController < ApplicationController
     recipient = @message.conversation.opposed_user(sender)
 
     ActionCable.server.broadcast "room_chat_channel_#{recipient.id}",
-                                  message: @message,
-                                  sender: sender                  
+                                 message: @message,
+                                 sender: sender
     respond_to do |format|
       format.js
     end
@@ -18,5 +20,4 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:user_id, :body)
   end
-
 end

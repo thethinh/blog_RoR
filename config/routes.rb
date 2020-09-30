@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # root routes
   root 'static_pages#home'
 
   # GET routes
-  get '/signup',  to: 'users#new'
+  get '/signup', to: 'users#new'
   get 'static_pages/home'
   get 'static_pages/help'
   get '/login', to: 'sessions#new'
@@ -16,20 +18,20 @@ Rails.application.routes.draw do
   get '/static_pages/error_page', to: 'static_pages#error_page'
 
   # POST routes
-  post '/signup',  to: 'users#create'
+  post '/signup', to: 'users#create'
   post '/login', to: 'sessions#create'
   post '/create_subcmt', to: 'comments#create_subcmt'
 
   # DELETE routes
   delete '/logout', to: 'sessions#destroy'
 
-  # Resources 
+  # Resources
   resources :users
   resources :account_activations, only: [:edit]
-  resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :microposts,          only: [:create, :destroy]
-  resources :relationships,       only: [:create, :destroy]
-  resources :comments, only: [:create, :destroy, :edit]
+  resources :password_resets,     only: %i[new create edit update]
+  resources :microposts,          only: %i[create destroy]
+  resources :relationships,       only: %i[create destroy]
+  resources :comments, only: %i[create destroy edit]
   resources :users do
     member do
       get :following, :followers
@@ -50,8 +52,6 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
-
   # Action cable
   mount ActionCable.server, at: '/cable'
-
 end
