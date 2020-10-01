@@ -11,24 +11,24 @@
     <span class="like-btn">
       <% if get_reaction_current_user(comment).present? %>
         <%= link_to get_reaction_current_user(comment).reactions,
-                    reaction_comment_path(comment_id: comment.id, 
+                    reaction_comment_path(reaction_refs_id: comment.id, 
                                           reaction: get_reaction_current_user(comment).reactions),
                     class: get_reaction_current_user(comment).reactions,
                     id: "react-cmt#{comment.id}",
                     remote: true %>
       <% else %>     
-        <%= link_to "Like", reaction_comment_path(comment_id: comment.id, reaction: "Like"),
+        <%= link_to "Like", reaction_comment_path(reaction_refs_id: comment.id, reaction: "Like"),
                             id: "react-cmt#{comment.id}", 
                             remote: true %>       
       <% end %>
       <div class="reactions-box">
-        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Like"),class:"reaction reaction-like", remote: true %> </span>
-        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Love"),class:"reaction reaction-love",remote: true %> </span>
-        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Care"),class:"reaction reaction-care",remote: true %> </span>
-        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Haha"),class:"reaction reaction-haha", remote: true %> </span>
-        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Wow"),class:"reaction reaction-wow", remote: true %> </span>
-        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Sad"),class:"reaction reaction-sad", remote: true %> </span>
-        <span><%= link_to "", reaction_comment_path(comment_id: comment.id, reaction: "Angry"),class:"reaction reaction-angry", remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(reaction_refs_id: comment.id, reaction: "Like"),class:"reaction reaction-like", remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(reaction_refs_id: comment.id, reaction: "Love"),class:"reaction reaction-love",remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(reaction_refs_id: comment.id, reaction: "Care"),class:"reaction reaction-care",remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(reaction_refs_id: comment.id, reaction: "Haha"),class:"reaction reaction-haha", remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(reaction_refs_id: comment.id, reaction: "Wow"),class:"reaction reaction-wow", remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(reaction_refs_id: comment.id, reaction: "Sad"),class:"reaction reaction-sad", remote: true %> </span>
+        <span><%= link_to "", reaction_comment_path(reaction_refs_id: comment.id, reaction: "Angry"),class:"reaction reaction-angry", remote: true %> </span>
       </div>
     </span> 
       &nbsp.&nbsp

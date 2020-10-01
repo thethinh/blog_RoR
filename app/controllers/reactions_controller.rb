@@ -5,15 +5,15 @@ class ReactionsController < ApplicationController
 
   def reaction_comment
     # check xem curren_user đã react comment này chưa
-    @reaction = current_user.reaction.find_by(comment_id: params[:comment_id])
+    @reaction = current_user.reaction.find_by(reaction_refs_id: params[:reaction_refs_id])
     if @reaction.nil?
       # nếu chưa có, tạo mới react và lưu vào trong db
-      @reaction = current_user.reaction.build(comment_id: params[:comment_id], reactions: params[:reaction])
+      @reaction = current_user.reaction.build(reaction_refs_id: params[:reaction_refs_id], reactions: params[:reaction], reaction_refs_type: 'Comment')
       if @reaction.save
         # Thông báo tới user được react comment
         unless react_cmt_of_me?
           content = "#{current_user.name} đã bày tỏ cảm xúc về một bình luận của bạn"
-          SendNotificationsService.new(content, @reaction.comment.user_id, @reaction.comment.user).send_notifications
+          SendNotificationsService.new(content, @reaction.reaction_refs.user_id, @reaction.reaction_refs.user).send_notifications
         end
         respond_to do |format|
           format.html

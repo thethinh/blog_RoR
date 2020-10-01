@@ -1,7 +1,7 @@
 <% if @reaction.errors.any? %>
   alert("Đã xảy ra lỗi , vui lòng thử lại sau !")
 <% else %>
-  $("#react-cmt<%= @reaction.comment_id %>").text("<%= @reaction.reactions %>");
-  document.getElementById("react-cmt<%= @reaction.comment_id %>").className = "<%= @reaction.reactions %>";
-  document.getElementById("react-cmt<%= @reaction.comment_id %>").href = "/reaction_comment?comment_id=<%=@reaction.comment_id%>&reaction=<%= @reaction.reactions %>"
+  $("#react-cmt<%= @reaction.reaction_refs_id %>").text("<%= @reaction.reactions %>");
+  document.getElementById("react-cmt<%= @reaction.reaction_refs_id %>").className = "<%= @reaction.reactions %>";
+  document.getElementById("react-cmt<%= @reaction.reaction_refs_id %>").href = "/reaction_comment?reaction_refs_id=<%=@reaction.reaction_refs_id%>&reaction=<%= @reaction.reactions %>"
 <% end %>
