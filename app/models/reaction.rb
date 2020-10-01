@@ -2,7 +2,7 @@
 
 class Reaction < ApplicationRecord
   belongs_to :user
-  belongs_to :comment
+  belongs_to :reaction_refs, polymorphic: true
 
   enum reactions: {
     Like: 0,

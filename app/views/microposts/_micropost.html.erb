@@ -21,7 +21,7 @@
       Like
     </a>
 
-    <a class="button-micropost" href="#">
+    <a class="button-micropost <%= micropost.id %>" onclick="getFocus(this)" style="cursor:pointer;">
       <i class="far fa-comment-alt"></i>
       Comment
     </a>
@@ -45,3 +45,11 @@
                                        catagory_box_cmt: "box-comment" } %>
 </li>
 
+<script>
+  function getFocus(obj) {
+    id_button_cmt = obj.className.slice(17, 20);
+    input = document.getElementsByClassName(`typecmt ${id_button_cmt}`)[0];
+    input.focus();
+    input.scrollTop(input.scrollHeight)
+  }
+</script>

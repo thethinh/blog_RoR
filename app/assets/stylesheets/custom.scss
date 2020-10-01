@@ -5,6 +5,10 @@
 
 /* universal */
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
     padding-top: 60px;
     background-image: url(/daniel-roe-lpjb_UMOyx8-unsplash.jpg);
@@ -371,7 +375,7 @@ input {
         position: absolute;
         height: 50px;
         width: 371px;
-        background-color: #ffffc3;
+        background-color: #dcdcdc;
         border-radius: 50px;
         top: -55px;
         left: -10px;
