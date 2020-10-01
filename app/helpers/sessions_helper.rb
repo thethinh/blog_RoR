@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module SessionsHelper
   # Logs in the given user.
-  def log_in user
+  def log_in(user)
     session[:user_id] = user.id
   end
 
@@ -47,15 +49,14 @@ module SessionsHelper
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
   end
-  
+
   def redirect_back_or(default)
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
   end
-	
+
   # Stores the URL trying to be accessed.
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
-  end  
-  
+  end
 end

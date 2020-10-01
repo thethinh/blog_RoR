@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StaticPagesController < ApplicationController
   def home
     if logged_in?
@@ -11,8 +13,5 @@ class StaticPagesController < ApplicationController
     # code here
   end
 
-  def error_page
-    
-  end
-  
+  def error_page; end
 end

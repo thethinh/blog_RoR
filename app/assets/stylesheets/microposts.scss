@@ -1,3 +1,36 @@
 // Place all the styles related to the Microposts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.button-micropost{
+  color: #606770;
+  font-weight: 800;
+  padding-right: 165px;
+  padding-left: 130px;
+}
+
+.button-micropost:hover{
+  color: #606770;
+}
+
+.button-micropost-liked{
+  margin-left: 5.7px;
+  color: #0a71e7;
+  font-weight: 800;
+  padding-right: 165px;
+  padding-left: 130px;
+}
+
+.button-micropost-liked:hover{
+  color: #0a71e7;
+}
+
+#count-like-of-post{
+  margin-left: 2px;
+  margin-top: 19px;
+  margin-bottom: -17px;
+  color: #73898a;
+}
+
+hr {
+  margin-bottom: 10px;
+}

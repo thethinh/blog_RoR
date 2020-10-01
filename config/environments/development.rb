@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -60,9 +62,8 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.active_job.queue_adapter = :sidekiq
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-  host = 'localhost:3000'                     # Local server
+  host = 'localhost:3000' # Local server
   config.action_mailer.default_url_options = { host: host, protocol: 'http' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
-
 end

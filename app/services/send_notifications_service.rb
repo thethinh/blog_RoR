@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SendNotificationsService
   def initialize(content, id_channel, user_send_email)
     @content = content
@@ -7,7 +9,7 @@ class SendNotificationsService
 
   def send_notifications
     ActionCable.server.broadcast "notifications_channel_#{@id_channel}",
-      content: @content
-    NotificationsToEmailJob.perform_later(@user_send_email,@content)
+                                 content: @content
+    NotificationsToEmailJob.perform_later(@user_send_email, @content)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_01_092428) do
+ActiveRecord::Schema.define(version: 2020_10_01_023328) do
 
   create_table "comments", force: :cascade do |t|
     t.string "body"
@@ -57,11 +57,11 @@ ActiveRecord::Schema.define(version: 2020_05_01_092428) do
   create_table "reactions", force: :cascade do |t|
     t.integer "reactions"
     t.integer "user_id", null: false
-    t.integer "comment_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["comment_id"], name: "index_reactions_on_comment_id"
-    t.index ["user_id", "comment_id"], name: "index_reactions_on_user_id_and_comment_id", unique: true
+    t.integer "reaction_refs_id"
+    t.string "reaction_refs_type"
+    t.index ["user_id", "reaction_refs_id"], name: "index_reactions_on_user_id_and_reaction_refs_id", unique: true
     t.index ["user_id"], name: "index_reactions_on_user_id"
   end
 
@@ -95,6 +95,5 @@ ActiveRecord::Schema.define(version: 2020_05_01_092428) do
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "microposts", "users"
-  add_foreign_key "reactions", "comments"
   add_foreign_key "reactions", "users"
 end

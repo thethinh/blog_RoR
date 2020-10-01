@@ -13,20 +13,57 @@
     <%= image_tag micropost.picture.url if micropost.picture? %>
   </span>
 
+  <div id="count-like-of-post">
+    <i class="fas fa-thumbs-up" style="position: relative; top:-2px;"></i>
+    <span id="sum-like-post<%= micropost.id %>"><%= micropost.reaction.count %></span>
+  </div>
+
   <hr>
 
+  <span>
+    <% if get_reaction_current_user(micropost).present? %>
+      <%= link_to "Liked",
+                  reaction_micropost_path(reaction_refs_id: micropost.id, reaction: "Like"),
+                  class: "button-micropost-liked",
+                  id: "button-like-micropost#{micropost.id}",
+                  remote: true  %>
+    <% else %>
+      <%= link_to "<i class='far fa-thumbs-up'></i>Like".html_safe,
+                  reaction_micropost_path(reaction_refs_id: micropost.id, reaction: "Like"),
+                  class: "button-micropost",
+                  id: "button-like-micropost#{micropost.id}",
+                  remote: true %>
+    <% end %>
+
+    <a class="button-micropost <%= micropost.id %>" onclick="getFocus(this)" style="cursor:pointer;">
+      <i class="far fa-comment-alt"></i>
+      Comment
+    </a>
+  </span>
+
+  <hr style="width: 749px; margin-left: -13px; position: relative; top: -10px">
+
   <div id="cmtpost<%= micropost.id %>">
-    <% micropost.comment.select_parent_comment.last(5).reverse.each do |comment|%>
+    <% micropost.comment.select_parent_comment.last(3).reverse.each do |comment|%>
       <%= render comment %>
     <% end %>
   </div>
   
-  <% unless (micropost.comment.select_parent_comment.length <= 5 ) %>
+  <% unless (micropost.comment.select_parent_comment.length <= 3 ) %>
     <%= link_to "Show comment", micropost_comments_path(micropost), remote: true, class: "btn-showcmt#{micropost.id}" %>
   <% end %>
+
   <%= render "comments/comment_form", {url_action: comments_path(micropost_id: micropost.id),
                                        method_controll: "POST",
                                        class_form_cmt: "typecmt #{micropost.id}",
                                        catagory_box_cmt: "box-comment" } %>
 </li>
 
+<script>
+  function getFocus(obj) {
+    id_button_cmt = obj.className.slice(17, 20);
+    input = document.getElementsByClassName(`typecmt ${id_button_cmt}`)[0];
+    input.focus();
+    input.scrollTop(input.scrollHeight)
+  }
+</script>
