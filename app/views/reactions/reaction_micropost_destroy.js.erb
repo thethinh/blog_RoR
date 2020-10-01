@@ -1,0 +1,11 @@
+<% if @reaction_post.errors.any? %>
+  alert("Đã xảy ra lỗi , vui lòng thử lại sau !")
+<% else %>
+  document.getElementById("button-like-micropost<%= @reaction_post.reaction_refs_id %>").innerHTML ="<i class='far fa-thumbs-up'></i>Like";
+  document.getElementById("button-like-micropost<%= @reaction_post.reaction_refs_id %>").classList.remove("button-micropost-liked");
+  document.getElementById("button-like-micropost<%= @reaction_post.reaction_refs_id %>").className = "button-micropost";
+  document.getElementById("button-like-micropost<%= @reaction_post.reaction_refs_id %>").href = "/reaction_micropost?reaction_refs_id=<%=@reaction_post.reaction_refs_id%>&reaction=Like"
+
+  var sum =   parseInt(document.getElementById("sum-like-post<%= @reaction_post.reaction_refs_id %>").textContent) - 1;
+  document.getElementById("sum-like-post<%= @reaction_post.reaction_refs_id %>").textContent = sum;
+<% end %>

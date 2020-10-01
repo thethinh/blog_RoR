@@ -13,13 +13,27 @@
     <%= image_tag micropost.picture.url if micropost.picture? %>
   </span>
 
+  <div id="count-like-of-post">
+    <i class="fas fa-thumbs-up" style="position: relative; top:-2px;"></i>
+    <span id="sum-like-post<%= micropost.id %>"><%= micropost.reaction.count %></span>
+  </div>
+
   <hr>
 
   <span>
-    <a class="button-micropost" href="#"> 
-      <i class="far fa-thumbs-up"></i>
-      Like
-    </a>
+    <% if get_reaction_current_user(micropost).present? %>
+      <%= link_to "Liked",
+                  reaction_micropost_path(reaction_refs_id: micropost.id, reaction: "Like"),
+                  class: "button-micropost-liked",
+                  id: "button-like-micropost#{micropost.id}",
+                  remote: true  %>
+    <% else %>
+      <%= link_to "<i class='far fa-thumbs-up'></i>Like".html_safe,
+                  reaction_micropost_path(reaction_refs_id: micropost.id, reaction: "Like"),
+                  class: "button-micropost",
+                  id: "button-like-micropost#{micropost.id}",
+                  remote: true %>
+    <% end %>
 
     <a class="button-micropost <%= micropost.id %>" onclick="getFocus(this)" style="cursor:pointer;">
       <i class="far fa-comment-alt"></i>
