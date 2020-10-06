@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'static_pages/home'
   get 'static_pages/help'
   get '/login', to: 'sessions#new'
-  get 'auth/:provider/callback', to: 'sessions#access_omniAuth'
+  get 'auth/:provider/callback', to: 'sessions#access_auth'
   get 'auth/failure', to: redirect('/')
   get '/download/infor_csv', to: 'downloadcsvs#info_csv'
   get '/reaction_comment', to: 'reactions#reaction_comment'
