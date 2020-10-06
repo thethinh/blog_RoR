@@ -13,10 +13,10 @@
     <%= image_tag micropost.picture.url if micropost.picture? %>
   </span>
 
-  <div id="count-like-of-post">
+  <a id="count-like-of-post" style="cursor: pointer">
     <i class="fas fa-thumbs-up" style="position: relative; top:-2px;"></i>
     <span id="sum-like-post<%= micropost.id %>"><%= micropost.reaction.count %></span>
-  </div>
+  </a>
 
   <hr>
 
@@ -57,6 +57,7 @@
                                        method_controll: "POST",
                                        class_form_cmt: "typecmt #{micropost.id}",
                                        catagory_box_cmt: "box-comment" } %>
+
 </li>
 
 <script>

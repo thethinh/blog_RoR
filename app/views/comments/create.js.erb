@@ -4,6 +4,6 @@
 <% else %>
   $("#cmtpost<%= @comment.micropost_id %>").append("<%= escape_javascript render(@comment) %>");
 
-  $(".<%= @comment.micropost_id %>")[0].value = "";
+  $(".<%= @comment.micropost_id %>")[1].value = "";
 <% end %>
 
