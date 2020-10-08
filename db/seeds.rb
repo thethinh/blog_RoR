@@ -64,3 +64,10 @@ usercmt.each do |usercmt|
     body: 'Hello everyone !'
   )
 end
+
+# reactions for micropost
+micropost = Micropost.first
+users = User.take(20)
+users.each do |uid|
+  micropost.reaction.create(user_id: uid.id, reactions: 'Like')
+end

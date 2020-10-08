@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/reaction_micropost', to: 'reactions#reaction_micropost'
   get '/show_subcomment', to: 'comments#show_subcomment'
   get '/static_pages/error_page', to: 'static_pages#error_page'
+  get '/alert_users_liked_post', to: 'microposts#users_liked_post'
 
   # POST routes
   post '/signup', to: 'users#create'

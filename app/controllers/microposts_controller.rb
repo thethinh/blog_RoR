@@ -21,6 +21,13 @@ class MicropostsController < ApplicationController
     redirect_to request.referrer || root_url
   end
 
+  def users_liked_post
+    @micropost = Micropost.find_by(id: params[:micropost_id])
+    uids = @micropost.reaction.pluck(:user_id)
+    @users = User.where(id: uids)
+    respond_to { |format| format.js { render 'users_liked_post.js.erb' } }
+  end
+
   private
 
   def micropost_params
