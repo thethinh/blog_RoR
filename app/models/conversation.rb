@@ -7,17 +7,18 @@ class Conversation < ApplicationRecord
 
   validates :sender_id, uniqueness: { scope: :recipient_id }
 
-  scope :between, lambda { |sender_id, recipient_id|
-    where(sender_id: sender_id, recipient_id: recipient_id).or(
-      where(sender_id: recipient_id, recipient_id: sender_id)
-    )
-  }
+  scope :between,
+        lambda { |sender_id, recipient_id|
+          where(sender_id: sender_id, recipient_id: recipient_id).or(
+            where(sender_id: recipient_id, recipient_id: sender_id)
+          )
+        }
 
   def self.get(sender_id, recipient_id)
     conversation = between(sender_id, recipient_id).first
     return conversation if conversation.present?
 
-    create(sender_id: sender_id, recipient_id: recipient_id)
+    create!(sender_id: sender_id, recipient_id: recipient_id)
   end
 
   def opposed_user(user)

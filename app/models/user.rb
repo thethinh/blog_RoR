@@ -1,35 +1,40 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  has_many :comment
+  has_many :comment, dependent: :destroy
   has_many :microposts, dependent: :destroy
   has_many :reaction, dependent: :destroy
-  has_many :active_relationships, class_name: 'Relationship',
-                                  foreign_key: 'follower_id',
-                                  dependent: :destroy
-  has_many :passive_relationships, class_name: 'Relationship',
-                                   foreign_key: 'followed_id',
-                                   dependent: :destroy
+  has_many :active_relationships,
+           class_name: 'Relationship',
+           foreign_key: 'follower_id',
+           dependent: :destroy
+  has_many :passive_relationships,
+           class_name: 'Relationship',
+           foreign_key: 'followed_id',
+           dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-  has_many :messages
-  has_many :conversations, foreign_key: 'sender_id'
+  has_many :messages, dependent: :destroy
+  has_many :conversations, foreign_key: 'sender_id', dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
-  validates :email, presence: true, length: { maximum: 255 },
-                    format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
+  validates :email,
+            presence: true,
+            length: { maximum: 255 },
+            format: { with: VALID_EMAIL_REGEX },
+            uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   scope :calculation_oneweek, ->(start_date, end_date) { where(created_at: start_date..end_date) }
   scope :csv_follow_1_month_recent, ->(start_date, end_date) { select(:created_at, :name).where(created_at: start_date..end_date) }
 
   def self.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
+    cost =
+      ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                       BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
@@ -69,7 +74,7 @@ class User < ApplicationRecord
 
   # Sends auto email to mail user
   def self.send_auto_email
-    User.all.each { |user| ScheduleMailer.auto_sendmail(user).deliver }
+    User.all.find_each { |user| ScheduleMailer.auto_sendmail(user).deliver }
   end
 
   # Sets the password reset attributes.
@@ -111,11 +116,13 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     # create new user if doesn't exist user email
     user = User.find_by(email: auth.info.email)
-    user = user.presence || User.new(name: auth.info.name,
-                                     email: auth.info.email,
-                                     password: auth.uid,
-                                     password_confirmation: auth.uid,
-                                     activated: true) # activated account because it's authentication from google
+    user = user.presence || User.new(
+      name: auth.info.name,
+      email: auth.info.email,
+      password: auth.uid,
+      password_confirmation: auth.uid,
+      activated: true
+    ) # activated account because it's authentication from google
   end
 
   def self.to_csv_follow
@@ -125,7 +132,7 @@ class User < ApplicationRecord
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
-      all.each do |user|
+      all.find_each do |user|
         csv << attributes.map { |attr| user.send(attr) }
       end
     end
