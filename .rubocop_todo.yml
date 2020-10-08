@@ -23,49 +23,24 @@ Bundler/OrderedGems:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Layout/FirstArrayElementLineBreak:
-  Exclude:
-    - 'app/controllers/users_controller.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
-Layout/FirstHashElementLineBreak:
-  Exclude:
-    - 'test/integration/users_signup_test.rb'
 
 # Offense count: 3
 # Cop supports --auto-correct.
-Layout/FirstMethodArgumentLineBreak:
-  Exclude:
-    - 'app/controllers/static_pages_controller.rb'
-    - 'app/controllers/users_controller.rb'
-    - 'app/models/user.rb'
 
 # Offense count: 4
 # Cop supports --auto-correct.
-Layout/MultilineArrayLineBreaks:
-  Exclude:
-    - 'app/controllers/users_controller.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedTypes: block, case, class, if, kwbegin, module
 # SupportedStyles: same_line, new_line
-Layout/MultilineAssignmentLayout:
-  Exclude:
-    - 'app/controllers/downloadcsvs_controller.rb'
-    - 'app/models/user.rb'
 
 # Offense count: 12
 # Cop supports --auto-correct.
-Layout/MultilineMethodArgumentLineBreaks:
-  Exclude:
-    - 'app/controllers/users_controller.rb'
-    - 'app/models/conversation.rb'
-    - 'app/models/user.rb'
-    - 'config/initializers/omniauth.rb'
-    - 'test/integration/users_signup_test.rb'
 
 # Offense count: 1
 # Configuration parameters: AllowSafeAssignment.
@@ -74,17 +49,9 @@ Lint/AssignmentInCondition:
     - 'app/channels/application_cable/connection.rb'
 
 # Offense count: 1
-Lint/DuplicateMethods:
-  Exclude:
-    - 'app/helpers/reactions_helper.rb'
 
 # Offense count: 3
 # Cop supports --auto-correct.
-Lint/NumberConversion:
-  Exclude:
-    - 'app/controllers/comments_controller.rb'
-    - 'config/environments/development.rb'
-    - 'config/environments/test.rb'
 
 # Offense count: 1
 Lint/UselessAssignment:
@@ -132,19 +99,9 @@ Naming/MethodName:
   EnforcedStyle: snake_case
 
 # Offense count: 1
-Performance/ChainArrayAllocation:
-  Exclude:
-    - 'app/controllers/comments_controller.rb'
 
 # Offense count: 4
 # Cop supports --auto-correct.
-Rails/ActiveRecordAliases:
-  Exclude:
-    - 'app/controllers/comments_controller.rb'
-    - 'app/controllers/password_resets_controller.rb'
-    - 'app/controllers/reactions_controller.rb'
-    - 'app/controllers/users_controller.rb'
-
 # Offense count: 1
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: slashes, arguments
@@ -156,17 +113,10 @@ Rails/FilePath:
 # Cop supports --auto-correct.
 # Configuration parameters: Include.
 # Include: app/models/**/*.rb
-Rails/FindEach:
-  Exclude:
-    - 'app/models/micropost.rb'
-    - 'app/models/user.rb'
 
 # Offense count: 3
 # Configuration parameters: Include.
 # Include: app/models/**/*.rb
-Rails/HasManyOrHasOneDependent:
-  Exclude:
-    - 'app/models/user.rb'
 
 # Offense count: 5
 # Configuration parameters: Include.
@@ -204,12 +154,6 @@ Rails/RequestReferer:
 # Offense count: 4
 # Cop supports --auto-correct.
 # Configuration parameters: AllowImplicitReturn, AllowedReceivers.
-Rails/SaveBang:
-  Exclude:
-    - 'app/controllers/messages_controller.rb'
-    - 'app/controllers/microposts_controller.rb'
-    - 'app/controllers/reactions_controller.rb'
-    - 'app/models/conversation.rb'
 
 # Offense count: 7
 # Configuration parameters: Blacklist, Whitelist.
@@ -288,10 +232,6 @@ Style/IfInsideElse:
 
 # Offense count: 2
 # Cop supports --auto-correct.
-Style/IfUnlessModifier:
-  Exclude:
-    - 'app/controllers/password_resets_controller.rb'
-    - 'app/models/micropost.rb'
 
 # Offense count: 5
 Style/InlineComment:
@@ -336,10 +276,6 @@ Style/Send:
 
 # Offense count: 2
 # Cop supports --auto-correct.
-Style/StringHashKeys:
-  Exclude:
-    - 'config/environments/development.rb'
-    - 'config/environments/test.rb'
 
 # Offense count: 65
 # Cop supports --auto-correct.

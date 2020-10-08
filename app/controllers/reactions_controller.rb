@@ -11,7 +11,7 @@ class ReactionsController < ApplicationController
       @reaction = current_user.reaction.build(reaction_refs_id: params[:reaction_refs_id], reactions: params[:reaction], reaction_refs_type: 'Comment')
       if @reaction.save
         # Thông báo tới user được react comment
-        unless react_of_me?
+        unless react_of_me?(@reaction)
           content = "#{current_user.name} đã bày tỏ cảm xúc về một bình luận của bạn"
           SendNotificationsService.new(content, @reaction.reaction_refs.user_id, @reaction.reaction_refs.user).send_notifications
         end
@@ -36,7 +36,7 @@ class ReactionsController < ApplicationController
         end
       else
         # update react mới
-        if @reaction.update_attributes(reactions: params[:reaction])
+        if @reaction.update(reactions: params[:reaction])
           respond_to do |format|
             format.html
             format.js { render 'reaction_comment.js.erb' }
@@ -54,7 +54,7 @@ class ReactionsController < ApplicationController
     if @reaction_post.nil?
       @reaction_post = current_user.reaction.build(reaction_refs_id: params[:reaction_refs_id], reactions: params[:reaction], reaction_refs_type: 'Micropost')
       if @reaction_post.save
-        unless react_of_me?
+        unless react_of_me?(@reaction_post)
           content = "#{current_user.name} đã thích một bài viết của bạn"
           SendNotificationsService.new(content, @reaction_post.reaction_refs.user_id, @reaction_post.reaction_refs.user).send_notifications
         end
@@ -64,7 +64,7 @@ class ReactionsController < ApplicationController
         format.js { render 'reaction_micropost.js.erb' }
       end
     else
-      @reaction_post.destroy
+      @reaction_post.destroy!
       respond_to do |format|
         format.html
         format.js { render 'reaction_micropost_destroy.js.erb' }

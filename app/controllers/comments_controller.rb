@@ -50,7 +50,7 @@ class CommentsController < ApplicationController
   end
 
   def index
-    current_sum_cmt = params[:currentSumCmt].to_i
+    current_sum_cmt = Integer(params[:currentSumCmt], 10)
     @post = Micropost.find(params[:micropost_id])
 
     if params[:currentSumCmt]
@@ -58,7 +58,7 @@ class CommentsController < ApplicationController
       @comment = @post.comment.select_parent_comment.last(current_sum_cmt + 4).reverse
     else
       # Nếu chưa có params truyền lên(lúc ban đầu) thì lấy ra 7 cmt (số comment ban đầu( mặc định 3) + 4)
-      @comment = @post.comment.select_parent_comment.last(7).reverse
+      @comment = @post.comment.select_parent_comment.last(7).reverse!
     end
     respond_to do |format|
       format.html { redirect_to @comment }
@@ -106,7 +106,7 @@ class CommentsController < ApplicationController
   end
 
   def update
-    if @comment.update_attributes(comment_params)
+    if @comment.update(comment_params)
       respond_to do |format|
         format.html { render @comment }
         format.js

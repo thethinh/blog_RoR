@@ -1,9 +1,16 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: %i[index edit update
-                                          destroy following followers]
-  before_action :correct_user,   only: %i[edit update]
+  before_action :logged_in_user,
+                only: %i[
+                  index
+                  edit
+                  update
+                  destroy
+                  following
+                  followers
+                ]
+  before_action :correct_user, only: %i[edit update]
 
   def index
     @users = User.paginate(page: params[:page], per_page: 8)
@@ -36,7 +43,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       flash[:success] = 'Profile updated'
       redirect_to @user
     else
@@ -61,8 +68,12 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation)
+    params.require(:user).permit(
+      :name,
+      :email,
+      :password,
+      :password_confirmation
+    )
   end
 
   # Confirms the correct user.

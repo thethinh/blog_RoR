@@ -14,9 +14,7 @@ class Micropost < ApplicationRecord
 
   # Validates the size of an uploaded picture.
   def picture_size
-    if picture.size > 5.megabytes
-      errors.add(:picture, 'should be less than 5MB')
-    end
+    errors.add(:picture, 'should be less than 5MB') if picture.size > 5.megabytes
   end
 
   def self.to_csv_posts
@@ -26,7 +24,7 @@ class Micropost < ApplicationRecord
 
     CSV.generate(headers: true) do |csv|
       csv << attributes
-      all.each do |user|
+      all.find_each do |user|
         csv << attributes.map { |attr| user.send(attr) }
       end
     end
