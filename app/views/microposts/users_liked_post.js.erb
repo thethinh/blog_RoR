@@ -1,0 +1,7 @@
+if($('#users_liked_post_modal').length != 0){
+  $('#users_liked_post_modal').remove();
+  $('body').append("<%= escape_javascript render 'modals/users_liked_post_modal', micropost: @micropost, user: @users %>");
+}else
+  $('body').append("<%= escape_javascript render 'modals/users_liked_post_modal', micropost: @micropost, user: @users %>");
+
+$('#users_liked_post_modal').modal('show');
