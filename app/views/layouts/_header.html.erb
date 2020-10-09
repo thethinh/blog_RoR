@@ -3,18 +3,17 @@
     <%= link_to "Blog Site", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", root_path %></li>
+        <li style="margin-top: 2.5px;"><%= link_to "Home", root_path %></li>
         <% if logged_in? %>
-          <li><%= link_to "Users", users_path %></li>
-          <li class="dropdown">
+          <li style="margin-top: 2.5px;"><%= link_to "Users", users_path %></li>
+          <li class="dropdown" style="margin-top: 2.5px;">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Message 
+              <i class="fas fa-comment-dots" style="font-size: 22px;"></i>
               <% if @conversations.length != 0  %> 
                 <span class="badge badge-light" id="sum-ib"><%= @conversations.length %></span>
               <% else %>
                 <span class="badge badge-light" id="sum-ib">0</span>
               <% end %>
-              <b class="caret"></b>
             </a>
             <ul class="dropdown-menu" id="conversations-group">
               <% @conversations.each do |conversations| %>
@@ -26,9 +25,12 @@
               <% end %>
             </ul>
           </li>
-          <li class="dropdown">
+          <li style="margin-top: 2.5px;">
+            <a><i class="fas fa-bell" style="font-size: 22px;"></i></a>
+          </li>
+          <li class="dropdown" style="margin-top: 2.5px;">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Account <b class="caret"></b>
+              <i class="fas fa-user-circle" style="font-size: 22px;"></i>
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "Profile", current_user %></li>
@@ -41,7 +43,7 @@
             </ul>
           </li>
         <% else %>
-          <li><%= link_to "Log in", login_path %></li>
+          <li style="margin-top: 2.5px;"><%= link_to "Log in", login_path %></li>
         <% end %>
       </ul>
     </nav>
