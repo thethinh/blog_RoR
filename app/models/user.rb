@@ -95,7 +95,7 @@ class User < ApplicationRecord
   end
 
   def feed
-    Micropost.where('user_id = ?', id)
+    Micropost.order("created_at")
   end
 
   # Follows a user.
