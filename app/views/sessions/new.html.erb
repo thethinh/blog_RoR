@@ -1,28 +1,35 @@
 <% provide(:title, "Log in") %>
-<h1>Log in</h1>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(:session, url: login_path) do |f| %>
-
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
-
-      <%= f.label :password %>
-      <%= link_to "(forgot password)", new_password_reset_path %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.label :remember_me, class: "checkbox inline" do %>
-        <%= f.check_box :remember_me %>
-        <span>Remember me on this computer</span>
-      <% end %>
-
-      <%= f.submit "Log in", class: "btn btn-primary" %>
-      <p style="display:flex; justify-content:center; color:#0000007a; margin:4px 0px 4px">OR </p>
-      <%= link_to "Signin with google", '/auth/google_oauth2', class:"btn btn-primary login-other google" %>
-      <%= link_to "Signin with facebook", '/auth/facebook', class:"btn btn-primary login-other facebook"  %>
-    <% end %>
-
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
-  </div>
+<div class="login-wrap">
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+		<div class="login-form">
+			<div class="sign-in-htm">
+        <%= form_for(:session, url: login_path) do |f| %>
+          <div class="group">
+            <%= f.label :email, class: "label" %>
+            <%= f.email_field :email, class: 'input' %>
+          </div>
+          <div class="group">
+            <%= f.label :password, class:"label" %>
+            <%= f.password_field :password, class: 'input' %>
+          </div>
+          <%= f.label :remember_me, class: "checkbox inline" do %>
+            <%= f.check_box :remember_me %>
+            <span>Keep me Signed in</span>
+          <% end %>
+          <div class="group">
+            <input type="submit" class="button" value="Sign In">
+          </div>
+          <%= link_to "Signin with google", '/auth/google_oauth2', class:"btn btn-primary login-other google" %>
+          <%= link_to "Signin with facebook", '/auth/facebook', class:"btn btn-primary login-other facebook"  %>
+          <div class="hr"></div>
+          <div class="foot-lnk">
+            <%= link_to "(forgot password)", new_password_reset_path %>
+          </div>
+        <% end %>
+			</div>
+		</div>
+	</div>
 </div>

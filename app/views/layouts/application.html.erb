@@ -11,13 +11,136 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
-    <div class="container">
+    <div class="container" style="margin-top:18px;">
       <% flash.each do |message_type, message| %>
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
       <% end %>
       <%= yield %>
-      <%= render 'layouts/footer' %>
+      
     </div>
+
+    <% unless logged_in? %>
+      <div class="center jumbotron">
+        <div id="content-nav">
+					<h1>Hello, i'm cora</h1>
+					<P>Welcome corazone, let's join with us to share greate moments
+					</P>
+          <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary btn-sign-up" %>
+        </div>
+
+        <div id="mac-pic">
+          <%= image_tag "macbook.png" %>
+        </div>
+      </div>
+
+      <div id="content">
+        <div id="content-cap">
+          <hr id="hr1">
+          <p>About us</p>
+          <hr id="hr2">
+        </div>
+
+        <div id="content-img">
+          <div id="row-1">
+            <div class="img-box">
+              <!-- set background image -->
+              <div class="img-element" style="background-image: url(image/content-img/randy-tarampi-U2eUlPEKIgU-unsplash.jpg);">
+              </div>
+              <!-- text under image -->
+              <p class="img-notes">BIG DREAM</p>
+            </div>
+
+            <div class="img-box">
+              <!-- set background image -->
+              <div class="img-element" style="background-image: url(image/content-img/kyle-glenn-kvIAk3J_A1c-unsplash.jpg);">
+              </div>
+              <!-- text under image -->
+              <p class="img-notes">GHI CHÚ</p>
+              <!-- effect background -->
+              <div class="img-effect"></div>
+              <!-- text under image -->
+              <p class="img-text">Đặt những mục tiêu cho bản thân và hoàn thành nó</p>
+            </div>
+
+            <div class="img-box">
+              <!-- set background image -->
+              <div class="img-element" style="background-image: url(image/content-img/marvin-meyer-SYTO3xs06fU-unsplash.jpg);">
+              </div>
+              <!-- text under image -->
+              <p class="img-notes">TRANG BỊ</p>
+              <!-- effect background -->
+              <div class="img-effect"></div>
+              <!-- text under image -->
+              <p class="img-text">Cơ sở vật chất kỹ thuật tiên tiến, hiện đại</p>
+            </div>
+
+            <div class="img-box">
+              <!-- set background image -->
+              <div class="img-element" style="background-image: url(image/content-img/alfons-morales-YLSwjSy7stw-unsplash.jpg);">
+              </div>
+              <!-- text under image -->
+              <p class="img-notes">CUNG CẤP</p>
+              <!-- effect background -->
+              <div class="img-effect"></div>
+              <!-- text under image -->
+              <p class="img-text">Nguồn tài liệu học tập vô giá</p>
+            </div>
+          </div>
+
+          <div id="row-2">
+            <div class="img-box">
+              <!-- set background image -->
+              <div class="img-element" style="background-image: url(image/content-img/priscilla-du-preez-XkKCui44iM0-unsplash.jpg);">
+              </div>
+              <!-- text under image -->
+              <p class="img-notes">ĐÀO TẠO</p>
+              <!-- effect background -->
+              <div class="img-effect"></div>
+              <!-- text under image -->
+              <p class="img-text">Khả năng làm việc nhóm cũng rất quan trọng</p>
+            </div>
+
+            <div class="img-box">
+              <!-- set background image -->
+              <div class="img-element" style="background-image: url(image/content-img/baim-hanif-pYWuOMhtc6k-unsplash.jpg);">
+              </div>
+              <!-- text under image -->
+              <p class="img-notes">ĐỒNG HÀNH</p>
+              <!-- effect background -->
+              <div class="img-effect"></div>
+              <!-- text under image -->
+              <p class="img-text">Hãy cũng nhau mở ra một chân trời mới</p>
+            </div>
+
+            <div class="img-box">
+              <!-- set background image -->
+              <div class="img-element" style="background-image: url(image/content-img/edwin-andrade-4V1dC_eoCwg-unsplash.jpg);">
+              </div>
+              <!-- text under image -->
+              <p class="img-notes">PHÁT TRIỂN</p>
+              <!-- effect background -->
+              <div class="img-effect"></div>
+              <!-- text under image -->
+              <p class="img-text">Chúng tôi sẵn sàng lắng nghe và ủng hộ bạn</p>
+            </div>
+
+            <div class="img-box">
+              <!-- set background image -->
+              <div class="img-element" style="background-image: url(image/content-img/element5-digital-jCIMcOpFHig-unsplash.jpg);">
+              </div>
+              <!-- text under image -->
+              <p class="img-notes">LET'S GO</p>
+              <!-- effect background -->
+              <div class="img-effect"></div>
+              <!-- text under image -->
+              <p class="img-text">Tự tin và mạnh mẽ để tiến tới</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= render 'layouts/footer' %>
 
     <% if logged_in? %>
 

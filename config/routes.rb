@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   post '/create_subcmt', to: 'comments#create_subcmt'
 
-  # DELETE routes
+  # DELETE_ routes
   delete '/logout', to: 'sessions#destroy'
 
   # Resources

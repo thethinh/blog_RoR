@@ -1,0 +1,215 @@
+body{
+	margin: 0px;
+}
+
+#primary{
+	width: 100%;
+	height: 1300px;
+}
+
+#Brand > a{
+	text-decoration: none;
+	font-family: 'Poppin-Bold';
+	display: block;
+	font-size: 35px;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding: 12px 30px 14px 12px;
+}
+
+#Nav > ul > li {
+	list-style: none;
+	position: relative;
+	left: 230px;
+	margin-right: 75px;
+}
+
+.menu > li > a{
+	text-decoration: none;
+	display: block;
+	font-family: 'Poppins-Regular';
+	padding-top: 22px;
+	padding-bottom: 22px;
+	padding-left: 6px;
+	padding-right: 6px;
+	font-size: 18px;
+	color: #FFFFFF;
+	transition: color .3s;
+}
+
+.menu > li > a::after{
+	position: relative;
+    background: rgba(255, 255, 255);
+    display: block;
+    height: 1px;
+    width: 25px;
+    margin-left: 25%;
+    top: 23px;
+    content: "";
+    transition: all .3s ease-out;
+}
+
+.menu > li > a:hover {
+	color: rgba(255, 255, 255, .45);
+
+}
+
+
+.khoa:hover .submenu{
+	visibility: visible;
+}
+
+.menu > li > a:hover::after{
+	width: 100%;
+	background-color: #ffff;
+	margin-left: 0px;
+}
+
+
+#Nav > ul{
+	padding-left: 0px;
+}
+
+.menu {
+	display:flex;
+	height: 65.5px;
+	width: 1044px;
+	margin-bottom: 0px;
+	margin-top: 6px;
+	border-right-style: solid;
+	border-right-color: rgba(255,255,255,0.1);
+	border-right-width: 1px;
+}
+.khoa{
+	position: relative;
+}
+
+.icon-arrow-right{
+	position: absolute;
+	right: 12px;
+	margin-top: 2px;
+}
+
+.submenu-child{
+	position: absolute;
+	left: 210px;
+	top: -7px;
+	width: 190px;
+	height: 220px;
+	background-color: #FFFF;
+	padding-left: 0px;
+	border-radius: 7px;
+	visibility: hidden;
+	box-shadow: 0px 4px 36px rgba(0, 0, 0, .16);
+	transition: visibility .1s;
+	transition-delay: .2s;
+}
+
+.submenu-child > li{
+	list-style: none;
+	margin-top: .6px;
+	width: 160px;
+	margin-left: 13px;
+}
+
+.submenu-child > li > a{
+	text-decoration: none;
+	color: #788487;
+	font-family: "Poppins-regular";
+	font-size: 16px;
+	display: block;
+	padding-top: 9px;
+	padding-bottom: 9px;
+	text-align: center;
+	border-bottom: solid .5px rgba(112,112,112,.25);
+	transition : color .5s;
+}
+
+.submenu-child > li > a:hover{
+	color: rgba(112,112,112,.4);
+}
+
+
+#submenu-child-brand{
+	text-align: center;
+	border-bottom: solid .5px rgba(112,112,112,.9);
+	height: 28px;
+	width: 190px;
+	font-family: "Poppins-Medium";
+	font-weight: bold;
+	font-size: 16px;
+	padding-top: 8px;
+	color: #788487;
+	margin-left: 0px;
+}
+
+#Nav{
+	border-bottom-style: solid;
+	border-bottom-color: rgba(245,245,245,0.4);
+	border-bottom-width: 1px;
+	display: flex;
+	justify-content: center;
+}
+
+#Header{
+	height: 760px;
+	background: rgb(80,92,253);
+	background: linear-gradient(100deg, rgba(80,92,253,1) 0%, rgba(0,219,222,1) 100%);
+}
+
+#Extra-Menu{
+	display: flex;
+	margin-top: 24px;
+}
+
+#Extra-Menu > li{
+	list-style: none;
+}
+
+#Extra-Menu > li > a{
+	color: #FFFFFF;
+	font-size: 18px;
+}
+
+#search-icon{
+	margin-right: 15px;
+	margin-left: -20px;
+}
+
+#menu-icon{
+	margin-left: 2px;
+}
+
+#content-nav{
+	font-family: "Poppins";
+	color: #FFFF;
+	text-align: center;
+}
+
+.btn-sign-up{
+	background-color: rosybrown;
+	position: relative;
+	top: 42px;
+}
+
+#content-nav > h1{
+	font-size: 80px;
+	margin: 0px;
+	font-weight: bold;
+	margin-top: 160px;
+}
+
+#content-nav > p{
+	font-size: 22px;
+	font-family: "Poppins-Regular";
+	display: block;
+	width: 730px;
+	margin-top: 20px;
+	margin: auto;
+}
+
+#mac-pic{
+	position: relative;
+	top: 178px;
+	text-align: center;
+}
