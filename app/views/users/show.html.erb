@@ -8,22 +8,28 @@
       </h1>
     </section>
 
-    <% if current_user != @user %>
-      <%= link_to "Message", conversations_path(user_id: @user.id),remote: true, method: :post,
-                        class: "btn btn-primary", role: "button" %>
+    <span style="display:flex;">
+      <% if current_user != @user %>
+        <%= link_to "Message", conversations_path(user_id: @user.id),remote: true, method: :post,
+                          class: "btn btn-primary", role: "button" %>
+      <% end %>
+      
+      <%= render 'follow_form' if logged_in? %>
+    </span>
+
+    <% if (current_user.following?(@user) && recept_request_addfriend?(@user)) || current_user?(@user) %>
+      <section class="stats">
+        <%= render 'shared/stats' %>
+      </section>
     <% end %>
-    <section class="stats">
-      <%= render 'shared/stats' %>
-    </section>
   </aside>
   <div class="col-md-8">
-    <%= render 'follow_form' if logged_in? %>
-    <% if @user.microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+    <% if @microposts_final.any? %>
+      <h3>Microposts (<%= @microposts_final.count %>)</h3>
       <ol class="microposts">
-        <%= render @microposts , {comment: @comment}%>
+        <%= render @microposts_final , {comment: @comment}%>
       </ol>
-      <%= will_paginate @microposts %>
+      <%= will_paginate @microposts_final %>
     <% end %>
   </div>
 </div>

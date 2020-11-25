@@ -12,8 +12,16 @@ class User < ApplicationRecord
            class_name: 'Relationship',
            foreign_key: 'followed_id',
            dependent: :destroy
-  has_many :following, through: :active_relationships, source: :followed
-  has_many :followers, through: :passive_relationships, source: :follower
+  has_many :following, through: :active_relationships, source: :followed do
+    def users_following
+      where('request_status=?', 1)
+    end
+  end
+  has_many :followers, through: :passive_relationships, source: :follower do
+    def users_follower
+      where('request_status=?', 1)
+    end
+  end
   has_many :messages, dependent: :destroy
   has_many :conversations, foreign_key: 'sender_id', dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
@@ -72,7 +80,6 @@ class User < ApplicationRecord
     UserMailer.account_activation(self).deliver_now
   end
 
-  # Sends auto email to mail user
   def self.send_auto_email
     User.all.find_each { |user| ScheduleMailer.auto_sendmail(user).deliver }
   end
@@ -95,15 +102,13 @@ class User < ApplicationRecord
   end
 
   def feed
-    Micropost.order("created_at")
+    Micropost.order('created_at')
   end
 
-  # Follows a user.
   def follow(other_user)
     following << other_user
   end
 
-  # Unfollows a user.
   def unfollow(other_user)
     following.delete(other_user)
   end
@@ -132,7 +137,7 @@ class User < ApplicationRecord
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
-      all.each do |user|
+      all.find_each do |user|
         csv << attributes.map { |attr| user.send(attr) }
       end
     end

@@ -561,3 +561,31 @@ span.picture {
 .google:hover{
   background-color: rgb(105, 43, 43);
 }
+
+#notification-request-connect{
+  height: auto;
+  overflow-x: auto;
+  li{
+    background-color: azure;
+    p{
+      text-align:center;
+    }
+    span{
+      display:flex; 
+      justify-content: space-evenly;
+    }
+  }
+  .button-accept-connect{
+    align-items: center;
+    width: 48%;
+    height: 30px;
+    background-color: aquamarine;
+  }
+
+  .button-decline-connect{
+    align-items: center;
+    width: 48%;
+    height: 30px;
+    background-color: #bed4cc;
+  }
+}

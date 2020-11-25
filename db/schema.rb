@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_01_023328) do
+ActiveRecord::Schema.define(version: 2020_11_23_040630) do
 
   create_table "comments", force: :cascade do |t|
     t.string "body"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2020_10_01_023328) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "picture"
+    t.integer "micropost_statement", default: 2
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
@@ -70,6 +71,7 @@ ActiveRecord::Schema.define(version: 2020_10_01_023328) do
     t.integer "followed_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "request_status", default: 0
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
@@ -87,6 +89,7 @@ ActiveRecord::Schema.define(version: 2020_10_01_023328) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.string "avata"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   get '/show_subcomment', to: 'comments#show_subcomment'
   get '/static_pages/error_page', to: 'static_pages#error_page'
   get '/alert_users_liked_post', to: 'microposts#users_liked_post'
-
+  get '/accept_connect_request', to: 'relationships#update_relationship'
+  get '/decline_connect_request', to: 'relationships#update_decline_relationship'
+  
   # POST routes
   post '/signup', to: 'users#create'
   post '/login', to: 'sessions#create'
