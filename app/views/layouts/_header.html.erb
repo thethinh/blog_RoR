@@ -39,8 +39,8 @@
                       want to follow you
                     </p>
                     <span>
-                      <%= link_to "Accept", accept_connect_request_path(follower_id: item.follower_id), class:'btn button-accept-connect', role: 'button', remote: true %>
-                      <%= link_to "Decline", decline_connect_request_path(follower_id: item.follower_id), class:'btn button-decline-connect', role: 'button', remote: true %>
+                      <%= link_to "Accept", accept_connect_request_path(follower_id: item.follower_id, id_name: "sub-request-connect#{item.id}"), class:'btn button-accept-connect', role: 'button', remote: true %>
+                      <%= link_to "Decline", decline_connect_request_path(follower_id: item.follower_id, id_name: "sub-request-connect#{item.id}"), class:'btn button-decline-connect', role: 'button', remote: true %>
                     </span>
                   </li>
                   <hr>

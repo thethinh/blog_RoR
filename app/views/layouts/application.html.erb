@@ -138,12 +138,11 @@
           </div>
         </div>
       </div>
+
+      <%= render 'layouts/footer' %>
     <% end %>
 
-    <%= render 'layouts/footer' %>
-
     <% if logged_in? %>
-
       <div class="notifications-box">
         <div class="alert alert-success alert-dismissible" id="notifications-alert">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

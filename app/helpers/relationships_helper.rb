@@ -2,7 +2,7 @@
 
 module RelationshipsHelper
   def recept_request_addfriend?(other_user)
-    Relationship.find_by(followed_id: other_user.id, follower_id: current_user.id).present?
+    Relationship.find_by(followed_id: other_user.id, follower_id: current_user.id, request_status: "recepted").present?
   end
 
   def sum_user_request_connect

@@ -1,31 +1,57 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="col-md-4">
-    <section>
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
+  <div>
+    <aside class="col-md-4">
+      <div class="introduce-user-area">
+        <h3 style="font-weight:bolder">Giới thiệu</h3>
+        <section>
+          <h1>
+            <%= gravatar_for @user %>
+            <%= @user.name %>
+          </h1>
+        </section>
 
-    <span style="display:flex;">
-      <% if current_user != @user %>
-        <%= link_to "Message", conversations_path(user_id: @user.id),remote: true, method: :post,
-                          class: "btn btn-primary", role: "button" %>
+        <span style="display:flex;">
+          <% if current_user != @user %>
+            <%= link_to "Message", conversations_path(user_id: @user.id),remote: true, method: :post,
+                              class: "btn btn-primary", role: "button" %>
+          <% end %>
+          
+          <%= render 'follow_form' if logged_in? %>
+        </span>
+
+        <% if (current_user.following?(@user) && recept_request_addfriend?(@user)) || current_user?(@user) %>
+          <section class="stats">
+            <%= render 'shared/stats' %>
+          </section>
+        <% end %>
+      </div>
+
+      <% if (current_user.following?(@user) && recept_request_addfriend?(@user)) || current_user?(@user) %>
+        <div class="highlight-image-area">
+          <h3 style="font-weight:bolder">Highlight image</h3>
+          <br>
+          <% if current_user?(@user) %>
+            <% @user.microposts.select {|a| a.picture.present?}.take(9).each do |item| %>
+              <%= image_tag item.picture.url, class:"image-highlight"%>
+            <% end %>
+          <% else %>
+            <% @user.microposts.where(micropost_statement: ["friendly", "publicly"]).select {|a| a.picture.present?}.take(9).each do |item| %>
+              <%= image_tag item.picture.url, class:"image-highlight"%>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="favorite-quote">
+          <h3 style="font-weight:bolder">Favorite quote</h3>
+          <%= image_tag 'quote.jpg', style:"width:334px;height:204px;" %>
+        </div>
       <% end %>
-      
-      <%= render 'follow_form' if logged_in? %>
-    </span>
-
-    <% if (current_user.following?(@user) && recept_request_addfriend?(@user)) || current_user?(@user) %>
-      <section class="stats">
-        <%= render 'shared/stats' %>
-      </section>
-    <% end %>
-  </aside>
-  <div class="col-md-8">
+    </aside>
+  </div>
+  <div class="col-md-8" style="float:right;">
     <% if @microposts_final.any? %>
-      <h3>Microposts (<%= @microposts_final.count %>)</h3>
+      <h3 class="title-sum-micropost">Microposts (<%= @microposts_final.count %>)</h3>
       <ol class="microposts">
         <%= render @microposts_final , {comment: @comment}%>
       </ol>

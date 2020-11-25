@@ -239,6 +239,7 @@ input {
     border-radius: 5px;
     padding-left: 12px;
     padding-right: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   }
   .user {
     position: relative;
@@ -588,4 +589,69 @@ span.picture {
     height: 30px;
     background-color: #bed4cc;
   }
+}
+
+.highlight-image-area{
+  background-color: #ffeeee7d;
+  padding-top: 0.5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 12px;
+  border-radius: 11px;
+  margin-top: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+  .image-highlight{
+    width: 102px;
+    height: 106px;
+    margin-bottom: 7px;
+    margin-right: 5px;
+  }
+}
+
+.introduce-user-area{
+  background-color: #ffeeee7d;
+  border-radius: 7px;
+  padding-top: 1px;
+  padding-left: 14px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.title-sum-micropost{
+  background-color: #ffeeee7d;
+  border-radius: 7px;
+  padding-top: 12px;
+  padding-bottom: 13px;
+  padding-left: 10px;
+  font-weight: bolder;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.favorite-quote{
+  background-color: #ffeeee7d;
+  border-radius: 5px;
+  margin-top: 25px;
+  padding-top: .5px;
+  padding-bottom: 5px;
+  padding-left: 12px;
+  padding-bottom: 17px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.infor-user-feed{
+  background-color: #ffeeee7d;
+  padding-top: .5px;
+  border-radius: 7px;
+  margin-top: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  padding-left: 10px;
+}
+
+.field textarea{
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  height: 170px;
+  outline: none;
 }

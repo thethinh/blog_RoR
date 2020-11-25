@@ -84,19 +84,16 @@ class User < ApplicationRecord
     User.all.find_each { |user| ScheduleMailer.auto_sendmail(user).deliver }
   end
 
-  # Sets the password reset attributes.
   def create_reset_digest
     self.reset_token = User.new_token
     update_attribute(:reset_digest,  User.digest(reset_token))
     update_attribute(:reset_sent_at, Time.zone.now)
   end
 
-  # Sends password reset email.
   def send_password_reset_email
     UserMailer.password_reset(self).deliver_now
   end
 
-  # Returns true if a password reset has expired.
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
   end
@@ -119,7 +116,6 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    # create new user if doesn't exist user email
     user = User.find_by(email: auth.info.email)
     user = user.presence || User.new(
       name: auth.info.name,
@@ -137,7 +133,7 @@ class User < ApplicationRecord
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
-      all.find_each do |user|
+      all.each do |user|
         csv << attributes.map { |attr| user.send(attr) }
       end
     end

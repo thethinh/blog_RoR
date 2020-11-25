@@ -29,8 +29,8 @@ consumer.subscriptions.create("NotificationsChannel", {
                               ' want to follow you'+
                             '</p>'+
                             '<span>'+
-                              '<a class="btn button-accept-connect" role="button" data-remote="true" href="/accept_connect_request?follower_id='+`${data.content_relationship.id}`+'">Accept</a>'+
-                              '<a class="btn button-decline-connect" role="button" data-remote="true" href="/decline_connect_request?follower_id='+`${data.content_relationship.id}`+'">Decline</a>'+
+                              '<a class="btn button-accept-connect" role="button" data-remote="true" href="/accept_connect_request?follower_id='+`${data.content_relationship.id}`+'&id_name=sub-request-connect'+`${data.id_relationship}`+'">Accept</a>'+
+                              '<a class="btn button-decline-connect" role="button" data-remote="true" href="/decline_connect_request?follower_id='+`${data.content_relationship.id}`+'&id_name=sub-request-connect'+`${data.id_relationship}`+'">Decline</a>'+
                             '</span>'+
                           '</li>'
       $("#sum-notify-connect-request").text(parseInt($("#sum-notify-connect-request").text())+1);

@@ -1,9 +1,9 @@
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+    <%= f.text_area :content, placeholder: "What are you thinking ?..." %>
   </div>
-  <label>Tùy chỉnh phạm vi người xem cho bài đăng của bạn:</label>
+  <label title="Note: If you do not select, the default is privately">Tùy chỉnh phạm vi người xem cho bài đăng của bạn:</label>
   <%= select_tag "micropost[micropost_statement]", options_for_select(Micropost.micropost_statements.keys), class: "form-control" %>
   <%= f.submit "Post", class: "btn btn-primary" %>
   <span class="picture">

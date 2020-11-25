@@ -1,6 +1,10 @@
-alert("You allowed connect request")
+<% if @result %>
+  alert("You allowed connect request");
+<% else %>
+  alert("Error !, please try again later");
+<% end %>
 
-$("#sub-request-connect<%= @relationship.id %>").remove();
+$("#<%= @id_name %>").remove();
 
 if(parseInt($("#sum-notify-connect-request").text()) > 0){
   $("#sum-notify-connect-request").text(parseInt($("#sum-notify-connect-request").text())-1);
