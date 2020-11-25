@@ -1,0 +1,7 @@
+alert("You declined connect request")
+
+$("#sub-request-connect<%= @relationship.id %>").remove();
+
+if(parseInt($("#sum-notify-connect-request").text()) > 0){
+  $("#sum-notify-connect-request").text(parseInt($("#sum-notify-connect-request").text())-1);
+}

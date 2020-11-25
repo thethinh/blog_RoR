@@ -116,6 +116,13 @@
 	margin: auto;
 }
 
+#follow_form{
+	width: 150px;
+	margin-left: 20px;
+}
 
-
-
+.icon-connect-friend{
+	position: absolute;
+	right: 190px;
+	top: 118px;
+}

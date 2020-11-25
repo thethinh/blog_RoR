@@ -8,6 +8,13 @@ class Micropost < ApplicationRecord
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
   validate  :picture_size
+
+  enum micropost_statement: {
+    privately: 0,
+    friendly: 1,
+    publicly: 2
+  }
+
   default_scope -> { order(created_at: :desc) }
   scope :calculation_oneweek, ->(start_date, end_date) { where(created_at: start_date..end_date) }
   scope :csv_post_1_month_recent, ->(start_date, end_date) { select(:created_at, :content, :picture).where(created_at: start_date..end_date) }
@@ -24,7 +31,7 @@ class Micropost < ApplicationRecord
 
     CSV.generate(headers: true) do |csv|
       csv << attributes
-      all.each do |user|
+      all.find_each do |user|
         csv << attributes.map { |attr| user.send(attr) }
       end
     end

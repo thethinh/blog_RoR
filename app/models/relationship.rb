@@ -5,4 +5,9 @@ class Relationship < ApplicationRecord
   belongs_to :followed, class_name: 'User'
   validates :follower_id, presence: true
   validates :followed_id, presence: true
+
+  enum request_status: {
+    waiting_recept: 0,
+    recepted: 1
+  }
 end

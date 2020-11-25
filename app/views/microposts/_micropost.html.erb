@@ -1,11 +1,22 @@
 <li id="<%= micropost.id %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
-  <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+  <span class="user">
+    <%= link_to micropost.user.name, micropost.user %>
+    <span style="float:right;">
+      <% if micropost.micropost_statement == "privately" %>
+        <i class="fas fa-lock"></i>
+      <% elsif micropost.micropost_statement == "friendly" %>
+        <i class="fas fa-users"></i>
+      <% else %>
+        <i class="fas fa-globe-americas"></i>
+      <% end %>
+    </span>
+  </span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     <% if current_user?(micropost.user) %>
-      <%= link_to "delete", micropost, method: :delete,
-                                       data: { confirm: "You sure?" } %>
+      <%= link_to "Delete", micropost, method: :delete,
+                                       data: { confirm: "You sure?" }, style: "color:brown;" %>
     <% end %>
   </span>
   <span
