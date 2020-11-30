@@ -40,3 +40,6 @@ yarn-debug.log*
 
 # Ignore file is posted
 public/uploads/micropost/picture
+
+# Ignore database file
+/config/database.yml
