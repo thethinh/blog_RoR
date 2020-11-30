@@ -28,6 +28,21 @@ class MicropostsController < ApplicationController
     respond_to { |format| format.js { render 'users_liked_post.js.erb' } }
   end
 
+  def edit
+    @micropost = Micropost.find_by(id: params[:id])
+    respond_to { |format| format.js }
+  end
+
+  def update
+    @micropost = Micropost.find_by(id: params[:id])
+    @micropost.update(micropost_params)
+    render :show
+  end
+
+  def show
+    @micropost = Micropost.find_by(id: params[:id])
+  end
+
   private
   def micropost_params
     params.require(:micropost).permit(:content, :picture, :micropost_statement)

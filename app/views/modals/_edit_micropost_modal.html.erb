@@ -1,0 +1,31 @@
+<div class="modal" id="edit_micropost_modal" data-backdrop="static" data-keyboard="false">
+  <div class="modal-edit-post">
+    <div class="modal-content" style="padding-left:20px; padding-right:20px;">
+      <%= form_for(micropost) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <h3>Edit micropost</h3>
+        <label>Description micropost</label>
+        <div class="field">
+          <%= f.text_area :content %>
+        </div>
+        <label title="Note: If you do not select, the default is privately">Chỉnh sửa quyền riêng tư bài viết:</label>
+        <select name="micropost[micropost_statement]" class="form-control">
+          <option value="<%= micropost.micropost_statement %>"><%= micropost.micropost_statement %></option>
+          <%= array_state = ["privately", "publicly", "friendly"] %>
+          <%= array_state.delete("#{micropost.micropost_statement}") %>
+          <% array_state.each do |item| %>
+            <option value="<%= item %>"><%= item %></option>
+          <%end%>
+        </select>
+        <div class="modal-footer">
+          <button type="button" class="cancel btn-dismiss-project" data-dismiss="modal">
+            Cancle
+          </button>
+          <button type="submit" class="btn-edit-risk-project next-step">
+            Save
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

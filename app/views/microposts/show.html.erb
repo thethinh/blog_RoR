@@ -1,0 +1,77 @@
+<div style="width: 66%; margin:auto;">
+  <ol class="microposts">
+    <li id="<%= @micropost.id %>">
+      <%= link_to gravatar_for(@micropost.user, size: 50), @micropost.user %>
+      <span class="user">
+        <%= link_to @micropost.user.name, @micropost.user %>
+        <span style="float:right;">
+          <% if @micropost.micropost_statement == "privately" %>
+            <i class="fas fa-lock"></i>
+          <% elsif @micropost.micropost_statement == "friendly" %>
+            <i class="fas fa-users"></i>
+          <% else %>
+            <i class="fas fa-globe-americas"></i>
+          <% end %>
+        </span>
+      </span>
+      <span class="timestamp">
+        Posted <%= time_ago_in_words(@micropost.created_at) %> ago.
+        <% if current_user?(@micropost.user) %>
+          <%= link_to "Delete", @micropost, method: :delete,
+                                            data: { confirm: "You sure?" }, style: "color:brown;" %>
+          .
+          <%= link_to "Edit", edit_micropost_path(@micropost), style: "color:#386a75;", remote: true %>
+        <% end %>
+      </span>
+      <span
+        class="content"><%= @micropost.content %>
+        <%= image_tag @micropost.picture.url if @micropost.picture? %>
+      </span>
+
+      <%= link_to(alert_users_liked_post_path(micropost_id: @micropost.id), id: "count-like-of-post", style: "cursor: pointer;", remote: true) do %>
+        <i class="fas fa-thumbs-up" style="position: relative; top:-2px;"></i>
+        <span id="sum-like-post<%= @micropost.id %>"><%= @micropost.reaction.count %></span>
+      <% end %>
+
+      <hr>
+
+      <span>
+        <% if get_reaction_current_user(@micropost).present? %>
+          <%= link_to "Liked",
+                      reaction_micropost_path(reaction_refs_id: @micropost.id, reaction: "Like"),
+                      class: "button-micropost-liked",
+                      id: "button-like-micropost#{@micropost.id}",
+                      remote: true  %>
+        <% else %>
+          <%= link_to "<i class='far fa-thumbs-up'></i>Like".html_safe,
+                      reaction_micropost_path(reaction_refs_id: @micropost.id, reaction: "Like"),
+                      class: "button-micropost",
+                      id: "button-like-micropost#{@micropost.id}",
+                      remote: true %>
+        <% end %>
+
+        <a class="button-micropost <%= @micropost.id %>" onclick="getFocus(this)" style="cursor:pointer;">
+          <i class="far fa-comment-alt"></i>
+          Comment
+        </a>
+      </span>
+
+      <hr style="width: 749px; margin-left: -13px; position: relative; top: -10px">
+
+      <div id="cmtpost<%= @micropost.id %>">
+        <% @micropost.comment.select_parent_comment.last(3).reverse.each do |comment|%>
+          <%= render comment %>
+        <% end %>
+      </div>
+
+      <% unless (@micropost.comment.select_parent_comment.length <= 3 ) %>
+        <%= link_to "Show comment", micropost_comments_path(@micropost), remote: true, class: "btn-showcmt#{@micropost.id}" %>
+      <% end %>
+
+      <%= render "comments/comment_form", {url_action: comments_path(micropost_id: @micropost.id),
+                                            method_controll: "POST",
+                                            class_form_cmt: "typecmt #{@micropost.id}",
+                                            catagory_box_cmt: "box-comment" } %>
+    </li>
+  </ol>
+</div>

@@ -17,6 +17,8 @@
     <% if current_user?(micropost.user) %>
       <%= link_to "Delete", micropost, method: :delete,
                                        data: { confirm: "You sure?" }, style: "color:brown;" %>
+      .
+      <%= link_to "Edit", edit_micropost_path(micropost), style: "color:#386a75;", remote: true %>
     <% end %>
   </span>
   <span

@@ -1,0 +1,7 @@
+if($('#edit_micropost_modal').length != 0){
+  $('#edit_micropost_modal').remove();
+  $('body').append("<%= escape_javascript render 'modals/edit_micropost_modal', micropost: @micropost %>");
+}else
+  $('body').append("<%= escape_javascript render 'modals/edit_micropost_modal', micropost: @micropost%>");
+
+$("#edit_micropost_modal").modal("show");
