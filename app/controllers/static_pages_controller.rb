@@ -11,9 +11,14 @@ class StaticPagesController < ApplicationController
     end
   end
 
-  def help
-    # code here
+  def search_user
+    if logged_in?
+      @users = User.all.where("lower(name) LIKE :search OR lower(email) LIKE :search", search: "%#{params[:search].downcase}%").uniq
+      respond_to { |format| format.js }
+    end
   end
+
+  def help; end
 
   def error_page; end
 end

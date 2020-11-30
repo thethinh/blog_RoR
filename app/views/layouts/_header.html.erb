@@ -1,77 +1,95 @@
 <header class="navbar navbar-fixed-top">
   <div id="Nav">
     <div id="Brand"> <%= link_to "Corazon", root_path %></div>
-      <ul class="menu">
-        <li><%= link_to "Home", root_path %></li>
-        <li><a href="#">About</a></li>
-        <% if logged_in? %>
-          <li><%= link_to "Users", users_path %></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fas fa-comment-dots" style="font-size: 22px;"></i>
-              <% if @conversations.length != 0  %> 
-                <span class="badge badge-light" id="sum-ib"><%= @conversations.length %></span>
-              <% else %>
-                <span class="badge badge-light" id="sum-ib">0</span>
-              <% end %>
-            </a>
-            <ul class="dropdown-menu" id="conversations-group">
-              <% @conversations.each do |conversations| %>
-                <li id="ib<%= conversations.opposed_user(current_user).id %>">
-                  <%= link_to "#{conversations.opposed_user(current_user).name}",
-                              conversations_path(user_id: conversations.opposed_user(current_user)
-                              ),remote: true, method: :post %>
-                </li>
-              <% end %>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Connect request <i class="fas fa-bell" style="font-size: 22px;"></i>
-              <span class="badge badge-light" id="sum-notify-connect-request"><%=sum_user_request_connect.count%></span>
-            </a>
-            <ul class="dropdown-menu" id="notification-request-connect">
-              <% if sum_user_request_connect.count > 0 %>
-                <% sum_user_request_connect.each do |item| %>
-                  <li id="sub-request-connect<%= item.id %>">
-                    <p>
-                      <%= link_to get_user_from_follower_id(item.follower_id).name, get_user_from_follower_id(item.follower_id), style:"color: cornflowerblue;" %> 
-                      want to follow you
-                    </p>
-                    <span>
-                      <%= link_to "Accept", accept_connect_request_path(follower_id: item.follower_id, id_name: "sub-request-connect#{item.id}"), class:'btn button-accept-connect', role: 'button', remote: true %>
-                      <%= link_to "Decline", decline_connect_request_path(follower_id: item.follower_id, id_name: "sub-request-connect#{item.id}"), class:'btn button-decline-connect', role: 'button', remote: true %>
-                    </span>
-                  </li>
-                  <hr>
-                <% end %>
-              <% end %>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fas fa-user-circle" style="font-size: 22px;"></i>
-            </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Profile", current_user %></li>
-              <li title= "Change your profile"><%= link_to "Settings", edit_user_path(current_user) %></li>
-              <li title= "Download your infor account"><%= link_to "Download CSV", download_infor_csv_path(format: :zip)%></li>
-              <li class="divider"></li>
-              <li>
-                <%= link_to "Log out", logout_path, method: :delete %>
+
+    <ul class="menu">
+      <li><%= link_to "Home", root_path %></li>
+      <li><a href="#">About</a></li>
+      <% if logged_in? %>
+        <li><%= link_to "Users", users_path %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fas fa-comment-dots" style="font-size: 22px;"></i>
+            <% if @conversations.length != 0  %> 
+              <span class="badge badge-light" id="sum-ib"><%= @conversations.length %></span>
+            <% else %>
+              <span class="badge badge-light" id="sum-ib">0</span>
+            <% end %>
+          </a>
+          <ul class="dropdown-menu" id="conversations-group">
+            <% @conversations.each do |conversations| %>
+              <li id="ib<%= conversations.opposed_user(current_user).id %>">
+                <%= link_to "#{conversations.opposed_user(current_user).name}",
+                            conversations_path(user_id: conversations.opposed_user(current_user)
+                            ),remote: true, method: :post %>
               </li>
-            </ul>
-          </li>
-        <% else %>
-          <li><%= link_to "Log in", login_path %></li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Connect request <i class="fas fa-bell" style="font-size: 22px;"></i>
+            <span class="badge badge-light" id="sum-notify-connect-request"><%=sum_user_request_connect.count%></span>
+          </a>
+          <ul class="dropdown-menu" id="notification-request-connect">
+            <% if sum_user_request_connect.count > 0 %>
+              <% sum_user_request_connect.each do |item| %>
+                <li id="sub-request-connect<%= item.id %>">
+                  <p>
+                    <%= link_to get_user_from_follower_id(item.follower_id).name, get_user_from_follower_id(item.follower_id), style:"color: cornflowerblue;" %> 
+                    want to follow you
+                  </p>
+                  <span>
+                    <%= link_to "Accept", accept_connect_request_path(follower_id: item.follower_id, id_name: "sub-request-connect#{item.id}"), class:'btn button-accept-connect', role: 'button', remote: true %>
+                    <%= link_to "Decline", decline_connect_request_path(follower_id: item.follower_id, id_name: "sub-request-connect#{item.id}"), class:'btn button-decline-connect', role: 'button', remote: true %>
+                  </span>
+                </li>
+                <hr>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fas fa-user-circle" style="font-size: 22px;"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Profile", current_user %></li>
+            <li title= "Change your profile"><%= link_to "Settings", edit_user_path(current_user) %></li>
+            <li title= "Download your infor account"><%= link_to "Download CSV", download_infor_csv_path(format: :zip)%></li>
+            <li class="divider"></li>
+            <li>
+              <%= link_to "Log out", logout_path, method: :delete %>
+            </li>
+          </ul>
+        </li>
+      <% else %>
+        <li><%= link_to "Log in", login_path %></li>
+      <% end %>
+    </ul>
+    <div>
+      <ul id="Extra-Menu">
+        <%= form_tag(search_user_path, :method => "get", class: 'navbar-left', remote: true) do %>  
+          <div class="input-group">  
+            <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>  
+            <div class="input-group-btn">  
+              <%= button_tag "", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>  
+            </div>  
+          </div>  
         <% end %>
+        <div class="search-result">
+          <ul>
+            
+          </ul>
+        </div>
       </ul>
-      <div>
-        <ul id="Extra-Menu">
-          <li id="search-icon"><a href="#"><i class="fas fa-search"></i></a></li>
-          <li id="menu-icon"><a href="#"><i class="fas fa-bars"></i></a></li>
-        </ul>
-      </div>
     </div>
   </div>
 </header>
+
+<script>
+  $(document).on("click", function(){
+    $(".search-result").find("ul li").remove();
+    $(".search-result").hide();
+  })
+</script>

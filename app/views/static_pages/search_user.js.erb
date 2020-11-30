@@ -1,0 +1,5 @@
+<% @users.each do |item| %>
+  $(".search-result").find("ul").append('<li class="item-result-search-user"><%= j link_to "#{gravatar_for item} #{item.name}".html_safe, item %></li>')
+<% end %>
+
+$(".search-result").show();

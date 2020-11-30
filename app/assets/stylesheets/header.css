@@ -20,7 +20,7 @@ body{
 #Nav > ul > li {
 	list-style: none;
 	position: relative;
-	left: 230px;
+	left: 220px;
 	margin-right: 75px;
 }
 
@@ -39,14 +39,14 @@ body{
 
 .menu > li > a::after{
 	position: relative;
-    background: rgba(255, 255, 255);
-    display: block;
-    height: 1px;
-    width: 25px;
-    margin-left: 25%;
-    top: 23px;
-    content: "";
-    transition: all .3s ease-out;
+	background: rgba(255, 255, 255);
+	display: block;
+	height: 1px;
+	width: 25px;
+	margin-left: 25%;
+	top: 23px;
+	content: "";
+	transition: all .3s ease-out;
 }
 
 .menu > li > a:hover {

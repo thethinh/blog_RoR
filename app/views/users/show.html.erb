@@ -16,7 +16,7 @@
             <%= link_to "Message", conversations_path(user_id: @user.id),remote: true, method: :post,
                               class: "btn btn-primary", role: "button" %>
           <% end %>
-          
+
           <%= render 'follow_form' if logged_in? %>
         </span>
 
