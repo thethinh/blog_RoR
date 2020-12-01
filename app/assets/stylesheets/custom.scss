@@ -652,7 +652,7 @@ span.picture {
 .field textarea{
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  height: 170px;
+  height: 85px;
   outline: none;
 }
 
@@ -695,6 +695,19 @@ span.picture {
 .modal-edit-post {
   width: 50%;
   position: relative;
-  top: 20%;
+  top: 5%;
   margin: auto;
+  #img-post-edit{
+    img{
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      margin-bottom: 15px;
+      border-radius: 3px;
+    }
+    i{
+      font-size: 26px;
+      position: absolute;
+      cursor: pointer;
+    }
+  }
+  
 }

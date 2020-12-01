@@ -8,7 +8,14 @@
         <div class="field">
           <%= f.text_area :content %>
         </div>
-        <label title="Note: If you do not select, the default is privately">Chỉnh sửa quyền riêng tư bài viết:</label>
+
+        <div id="img-post-edit"><%= image_tag micropost.picture.url if micropost.picture? %><i class="fas fa-times-circle" id="remove-picture-edit-post"></i></div>
+
+        <span class="picture" style="display:none;">
+          <%= f.file_field :picture %>
+        </span>
+
+        <label>Chỉnh sửa quyền riêng tư bài viết:</label>
         <select name="micropost[micropost_statement]" class="form-control">
           <option value="<%= micropost.micropost_statement %>"><%= micropost.micropost_statement %></option>
           <%= array_state = ["privately", "publicly", "friendly"] %>
@@ -18,10 +25,10 @@
           <%end%>
         </select>
         <div class="modal-footer">
-          <button type="button" class="cancel btn-dismiss-project" data-dismiss="modal">
+          <button type="button" class="cancel btn btn-dismiss-project" data-dismiss="modal">
             Cancle
           </button>
-          <button type="submit" class="btn-edit-risk-project next-step">
+          <button type="submit" class="btn btn-primary">
             Save
           </button>
         </div>
@@ -29,3 +36,9 @@
     </div>
   </div>
 </div>
+
+<script>
+  $("#remove-picture-edit-post").on("click", function(){
+    alert("Sorry, this feature is not developed, please try again later !")
+  });
+</script>
