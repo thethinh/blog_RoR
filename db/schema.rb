@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_23_040630) do
+ActiveRecord::Schema.define(version: 2020_12_15_143125) do
 
   create_table "comments", force: :cascade do |t|
     t.string "body"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_11_23_040630) do
     t.integer "sender_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "state_conversation", default: 0
     t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true
     t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
     t.index ["sender_id"], name: "index_conversations_on_sender_id"
@@ -53,6 +54,14 @@ ActiveRecord::Schema.define(version: 2020_11_23_040630) do
     t.integer "micropost_statement", default: 2
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "picture_microposts", force: :cascade do |t|
+    t.string "picture"
+    t.integer "microposts_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["microposts_id"], name: "index_picture_microposts_on_microposts_id"
   end
 
   create_table "reactions", force: :cascade do |t|

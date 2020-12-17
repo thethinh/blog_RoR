@@ -19,9 +19,6 @@ body{
 
 #Nav > ul > li {
 	list-style: none;
-	position: relative;
-	left: 130px;
-	margin-right: 75px;
 }
 
 .menu > li > a{
@@ -79,6 +76,7 @@ body{
 	border-right-style: solid;
 	border-right-color: rgba(255,255,255,0.1);
 	border-right-width: 1px;
+	justify-content: space-evenly;
 }
 .khoa{
 	position: relative;
@@ -160,6 +158,11 @@ body{
 #Extra-Menu{
 	display: flex;
 	margin-top: 24px;
+	padding-left: 14px;
+}
+
+.navbar-left{
+	margin-right: 10px;
 }
 
 #Extra-Menu > li{

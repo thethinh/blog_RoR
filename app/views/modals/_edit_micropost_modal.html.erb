@@ -9,11 +9,13 @@
           <%= f.text_area :content %>
         </div>
 
-        <div id="img-post-edit"><%= image_tag micropost.picture.url if micropost.picture? %><i class="fas fa-times-circle" id="remove-picture-edit-post"></i></div>
+        <% if micropost.picture?  %>
+          <div id="img-post-edit"><%= image_tag micropost.picture.url %><i class="fas fa-times-circle" id="remove-picture-edit-post"></i></div>
 
-        <span class="picture" style="display:none;">
-          <%= f.file_field :picture %>
-        </span>
+          <span class="picture" style="display:none;">
+            <%= f.file_field :picture %>
+          </span>
+        <% end %>
 
         <label>Chỉnh sửa quyền riêng tư bài viết:</label>
         <select name="micropost[micropost_statement]" class="form-control">
@@ -24,6 +26,7 @@
             <option value="<%= item %>"><%= item %></option>
           <%end%>
         </select>
+        
         <div class="modal-footer">
           <button type="button" class="cancel btn btn-dismiss-project" data-dismiss="modal">
             Cancle
