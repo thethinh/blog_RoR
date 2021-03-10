@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_15_143125) do
+ActiveRecord::Schema.define(version: 2020_11_23_040630) do
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "body"
     t.string "picture"
-    t.integer "micropost_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "micropost_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "comment_id"
@@ -24,30 +24,29 @@ ActiveRecord::Schema.define(version: 2020_12_15_143125) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "conversations", force: :cascade do |t|
+  create_table "conversations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "recipient_id"
     t.integer "sender_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "state_conversation", default: 0
     t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true
     t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
     t.index ["sender_id"], name: "index_conversations_on_sender_id"
   end
 
-  create_table "messages", force: :cascade do |t|
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "body"
-    t.integer "user_id", null: false
-    t.integer "conversation_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "conversation_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "microposts", force: :cascade do |t|
+  create_table "microposts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "picture"
@@ -56,17 +55,9 @@ ActiveRecord::Schema.define(version: 2020_12_15_143125) do
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
 
-  create_table "picture_microposts", force: :cascade do |t|
-    t.string "picture"
-    t.integer "microposts_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["microposts_id"], name: "index_picture_microposts_on_microposts_id"
-  end
-
-  create_table "reactions", force: :cascade do |t|
+  create_table "reactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "reactions"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "reaction_refs_id"
@@ -75,7 +66,7 @@ ActiveRecord::Schema.define(version: 2020_12_15_143125) do
     t.index ["user_id"], name: "index_reactions_on_user_id"
   end
 
-  create_table "relationships", force: :cascade do |t|
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
     t.datetime "created_at", precision: 6, null: false
@@ -86,7 +77,7 @@ ActiveRecord::Schema.define(version: 2020_12_15_143125) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
@@ -98,7 +89,6 @@ ActiveRecord::Schema.define(version: 2020_12_15_143125) do
     t.datetime "activated_at"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
-    t.string "avata"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
