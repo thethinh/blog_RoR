@@ -6,11 +6,10 @@ set :repo_url, "git@github.com:thethinh/blog_RoR.git"
 set :ssh_options, { :forward_agent => true }
 
 set :pty, true
-set :linked_files, %w(config/database.yml config/application.yml)
+set :linked_files, %w(config/database.yml config/application.yml config/master.key)
 set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads)
 set :keep_releases, 5
-set :rvm_type, :user
-set :passenger_restart_with_touch, true
+set :rbenv_type, :user
 
 set :puma_rackup, -> {File.join(current_path, "config.ru")}
 set :puma_state, -> {"#{shared_path}/tmp/pids/puma.state"}

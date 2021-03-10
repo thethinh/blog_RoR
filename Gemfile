@@ -24,11 +24,18 @@ gem 'rubyzip'
 gem 'sidekiq'
 gem 'will_paginate', '3.1.7'
 gem 'ransack', github: 'activerecord-hackery/ransack'
+gem "capistrano"
+gem "capistrano3-puma"
+gem "capistrano-rails", require: false
+gem "capistrano-yarn"
+gem "capistrano-bundler", require: false
+gem "capistrano-rbenv"
+
+# ORM
+gem "mysql2", ">= 0.3.18", "< 0.5"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
 # Use SCSS for stylesheets
@@ -54,13 +61,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'whenever', require: false
-  gem "capistrano"
-  gem "capistrano3-puma"
-  gem "capistrano-rails", require: false
-  gem 'capistrano-passenger'
-  gem "capistrano-yarn"
-  gem "capistrano-bundler", require: false
-  gem "capistrano-rvm"
 end
 
 group :test do
