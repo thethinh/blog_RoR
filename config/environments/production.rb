@@ -104,4 +104,6 @@ Rails.application.configure do
     authentication: :plain,
     enable_starttls_auto: true
   }
+
+  config.action_cable.allowed_request_origins = ["http://18.139.217.68/"]
 end
